@@ -73,7 +73,7 @@
 'ÇA POUTRE'.toLocaleLowerCase()   // => 'ça poutre'
 
 'one,two,three'.split(',')        // => ['one', 'two', 'three']
-'one,,two,three'.split(/\W+/)     // => ['one', 'two']
+'one,,two,three'.split(/\W+/)     // => ['one', 'two', 'three']
 
 'hello'.substring(1)      // => 'ello'
 'hello'.slice(1, -2)      // => 'el' -> [1;length-2[
@@ -129,7 +129,7 @@ Date.UTC(y, m, d, h, mn, s, ms) // => numérique
 					<h2>Les objets</h2>
 					<pre>
 						<code class='javascript'>
-let obj = { first: 'David', last: 'Lopez', age: 77 };
+let obj = { first: 'David', last: 'Lopez', age: 42 };
 obj.first  // => 'David'
 obj['age'] // => 42
 
