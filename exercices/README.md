@@ -1,12 +1,4 @@
-# Modules
-
-Ecrire un fichier `exercice1.js` qui importe la variable `NOM_SAUCE` depuis le fichier `modules/frites.js`, ainsi que la fonction exposée par défault, et expose une variable `SAUCE` qui vaut `'sauce ' + NOM_SAUCE`.
-
-Ce fichier devra également exposer par défault la fonction par défault de `module/frites.js`.
-
-# Reducers
-
-Ecrire un fichier `exercice2.js` qui expose une fonction `reduceArray` qui prend le tableau
+# Arrays, map, filter et reducer
 
 ```javascript
 [
@@ -19,101 +11,68 @@ Ecrire un fichier `exercice2.js` qui expose une fonction `reduceArray` qui prend
         type: 'backend'
     },
     {
-        nom: 'Javasript',
-        type: 'fronted+backend',
+        nom: 'Javascript',
+        type: 'frontend+backend',
         swag: 'infini'
     }
 ]
 ```
 
- et retourne une chaine de caractères concaténant l'ensemble des noms des objets du tableau, séparés par une virgule (`'C#JAVAJAVASCRIPT'`).
+1 - Ecrire une fonction qui prend en entrée le tableau précédent, et retourne un tableau de string des noms des langages
 
-# Filters + lodash's reduce
+2 - Ecrire une fonction qui prend en entrée le tableau précédent, et retourne un tableau filtré sur les langages backend uniquement
 
- Ecrire un fichier `exercice3.js` qui expose une fonction `renewComputers` qui prend en entrée l'objet
+3- Ecrire une fonction qui prend en entrée le tableau précédent et retourne les noms des langages concaténés, séparés par ':' .
 
- ```javascript
- {
-     apple: {
-         present: false,
-         wanted: true
-     },
-     hp: {
-         present: true,
-         wanted: true
-     },
-     acer: {
-         present: false,
-         wanted: false
-     }
- }
- ```
+# Lodash
 
- et retourne un tableau des marques non présentes mais désirées
+1 - En utilisant lodash, écrire une fonction qui réalise l'intersection de deux tableaux ([2, 1], [2, 3] -> [2])
 
- ```javascript
-['apple']
- ```
+2 - En utilisant lodash, écrire une fonction qui réalise l'intersection de deux tableaux ([{x:2, y:'Tomate'}, {x:2, y:'Carotte'}], [{x:2, y:'Carotte'}, {x:3, y:'Aubergine'}] -> [{x:2, y:'Carotte'}])
 
-
-# Filters + map
-
- Ecrire un fichier `exercice4.js` qui expose une fonction `recognizeYourMaster` qui prend en argument le tableau
-
- ```javascript
- [
-     {
-         nom: 'C#',
-         type: 'backend'
-     },
-     {
-         nom: 'Java',
-         type: 'backend'
-     },
-     {
-         nom: 'Javasript',
-         type: 'frontend',
-         swag: 'infini'
-     }
- ]
- ```
-
- et retourne un tableau d'éléments dont le `swag` est non null, auxquels vous appliquerz la fonction exposée par le fichier `index.js` du dossier `map`.
-
-# Promise
-
-Ecrire un fichier `exercice5.js` qui expose une fonction `transformYourData` qui prend en argument le tableau
-
+# Closure
+1 - Exécutez ces lignes de code :
 ```javascript
-[
-    {
-        nom: 'C#',
-        type: 'backend'
-    },
-    {
-        nom: 'Java',
-        type: 'backend'
-    },
-    {
-        nom: 'Javasript',
-        type: 'frontend',
-        swag: 'infini'
-    }
-]
+const superbeObjet = { 
+  name: 'Rodrigo',
+  direBonjour(){
+    console.log(`Bonjour ${this.name}`)
+  }
+};
+
+superbeObjet.direBonjour();
+superbeObjet.direBonjour.call({});
+superbeObjet.direBonjour.bind({name: 'Thomas'})();
+superbeObjet.direBonjour.bind({name: 'Thomas'}).call({}));
+```
+Comment expliquez-vous les résultats obtenus ?
+
+2 - Ecrire une fonction disant bonjour à l'équipe Focus (['Amélie', 'Thomas', 'Guénolé', 'Pierre']), en utilisant le superbeObjet.
+
+# Promise + destruct
+
+1 - Exécutez ces lignes de code :
+```javascript
+Promise.resolve('Un message dans promisse').then(msg => console.log('Message', msg));
+console.log('Apres');
+```
+Qu'observez-vous ?
+
+2 - Ecrire une fonction recevant en entrée la promesse suivante,
+```javascript
+Promise.resolve({nom : 'Bazire', statut : 'Stagiaire', entreprise: 'Klee'})
+```
+et qui renvoie une promesse du type 
+```javascript
+Promise.resolve({nom : 'Bazire', autre: {statut : 'Stagiaire', entreprise: 'Klee'}})
 ```
 
-et retourne un objet avec, qui contiendra les propriétés suivantes: {data: 'Le tableau trié par Swag puis par nom', une propriété totalCount qui contient le nombre d'élément}.
-Le résultat doit retourner une promesse.
-
-# Destruct
-
-Ecrire un fichier `exercice6.js` qui expose une fonction `destructMyObject` qui prend en argument un objet de la forme {nom : 'David', prenom: 'LOPEZ', age , ...}.
-Et retourne un nouvel objet qui aura la forme `{identite: {nom: 'David', prenom: 'Lopez'}, autresInfos: {/*Le reste*/}}`
-
-
-# Backbone
-
-
-Ecrire un fichier `exercice7.js` qui expose une fonction `createRouter`
-
-Ce routeur doit pouvoir prendre en charge plusieurs routes 'home', 'contact/3' par exemple et afficher dans la console le nom de la route.
+3 - Ecrire une fonction recevant en entrée la promesse suivante,
+```javascript
+Promise.resolve([{nom : 'Bazire', statut : 'Stagiaire', entreprise: 'Klee'}, {nom : 'Pierre', statut : 'FocusPapa', entreprise: 'Klee'}, {nom:'Stan', statut :'Mascotte', entreprise:'Ailleurs'})
+```
+et qui renvoie une promesse du type 
+```javascript
+Promise.resolve([{nom : 'Bazire', autre: {statut : 'Stagiaire', entreprise: 'Klee'}}, {nom : 'Pierre', statut : 'FocusPapa', entreprise: 'Klee'}])
+```
+(filtrage sur l'entreprise + chgt de la structure de l'objet)
