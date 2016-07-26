@@ -217,7 +217,8 @@ arr1                // => ['one', 'two', 'three', 'four']
 // for…in itère sur LES PROPRIÉTÉS ÉNUMÉRABLES de N’IMPORTE QUEL OBJET
 var arr = ['hello', 'world', , 'cool'];
 for (var k in arr){ console.log(k)}; // => 0, 1, 3
-
+// for…of itère sur les éléments d'un objet itérable
+for (var k of arr){ console.log(k)}; // => hello, world, undefined, cool
 
 						</code>
 					</pre>
@@ -251,9 +252,10 @@ fakeArray.reverse().join(' ');
 						<code class='javascript'>
 const ARRAY = [1,2,3,4];
 for(let i = 0, _l=ARRAY.length; i < _l; i++ ){console.log(ARRAY[i])}
-ARRAY.forEach(function(element, idx){console.log(elt, i)});
-ARRAY.map(function(element, idx){console.log(elt, i)});
-// transforme le tableau
+
+ARRAY.forEach(function(element, idx){console.log(element, idx)});
+
+ARRAY.map(function(element, idx){console.log(element, idx)});
 						</code>
 					</pre>
 				</section>
@@ -444,6 +446,10 @@ NodeList.prototype.on = NodeList.prototype.addEventListener = function (name, fn
 				<section data-background='http://www.kolhamevaser.com/wp-content/uploads/2015/05/Schechter.Bavel_.TowerofBavel.jpg'>
 					<h1>Babel</h1>
 				</section>
+				<section data-background='http://jlongster.com/s/upload/webpack-hot1.png'>
+			    		<h1 style='background-color:rgba(1,1,1, 0.5);'><a href='https://webpack.github.io/'>Webpack</a></h1>
+				</section>
+
 				<section data-background='https://media.giphy.com/media/pjQTX3sfnKnx6/giphy.gif'>
 					<h1>Debug</h1>
 				</section>
@@ -954,39 +960,8 @@ const FILTERS = {
 				</section>
 			</section>
 			<section >
-				<section data-background='http://cdn.londonandpartners.com/visit/london-organisations/big-ben/63602-640x360-bigben_tilt_640.jpg'>
-					<h1 style='background-color:rgba(1,1,1, 0.5);'><a href='https://github.com/get-focus/formation-js/tree/master/exercices'>Exercices</a></h1>
-				</section>
-				<section>
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>Utilisation des modules</h2>
-				</section>
-				<section>
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>Utilisation de la fonction reduce d'un tableau</h2>
-				</section>
-				<section>
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>Les trucs utiles</h2>
-					<ul>
-						<li>formatter des dates <code>moment().format('L')</code></li>
-						<li>Manipuler des dates <code>moment(maDate).add('days', 1)</code></li>
-						<li>Timezone...</li>
-					</ul>
-					<blockquote>Si tu manipules des dates tu utilises momentjs</blockquote>
-				</section>
-			</section>
-			<section data-background='http://jlongster.com/s/upload/webpack-hot1.png'>
-
-			    <h1 style='background-color:rgba(1,1,1, 0.5);'><a href='https://webpack.github.io/'>Webpack</a></h1>
-
-			</section>
-			<section >
 				<section>
 					<h1 style='background-color:rgba(1,1,1, 0.5);'><a href='https://github.com/get-focus/formation-js/tree/master/exercices'>Exercices</a></h1>
-				</section>
-				<section>
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>Utilisation des modules</h2>
-				</section>
-				<section>
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>Utilisation de la fonction reduce d'un tableau</h2>
 				</section>
 			</section>
 		</div>
