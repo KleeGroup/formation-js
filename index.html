@@ -214,6 +214,8 @@ data.slice(-2, -1) // => [2]
 let arr1 = ['one', 'two'], arr2 = ['three', 'four'];
 arr1.push(...arr2) // => 4
 arr1                // => ['one', 'two', 'three', 'four']
+//le map 
+arr1.map(element => console.log(element))
 // for…in itère sur LES PROPRIÉTÉS ÉNUMÉRABLES de N’IMPORTE QUEL OBJET
 var arr = ['hello', 'world', , 'cool'];
 for (var k in arr){ console.log(k)}; // => 0, 1, 3
@@ -656,23 +658,6 @@ function yourModule(require, module, exports) {
 					</code></pre>
 					<blockquote>Dans node on ne voit pas la fonction enrobante...</blockquote>
 				</section>
-				<section data-background='https://sourcemaking.com/files/v2/landings/DesignPatterns-cover.png'>
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>A la base de tous les design pattern JS</h2>
-					<ul style='background-color:rgba(1,1,1, 0.5);'>
-						<li>Décorateur</li>
-						<li>Façade</li>
-						<li>Mémoïsation</li>
-						<li>Singleton</li>
-						<li>Benchmarking</li>
-						<li>Logging</li>
-						<li>Throttling / Debouncing</li>
-						<li>etc.</li>
-					</ul>
-				</section>
-				<section data-background='https://sourcemaking.com/files/v2/landings/DesignPatterns-cover.png'>
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>A la base de tous les design pattern JS</h2>
-
-				</section>
 				<section data-background='http://995642590.r.lightningbase-cdn.com/wp-content/uploads/2013/05/HR-Double-Bind-article-by-John-Sumser-on-HR-Examiner-425x282px.jpg'>
 					<h2 style='background-color:rgba(1,1,1, 0.5);'>Le binding</h2>
 
@@ -685,9 +670,11 @@ var name = 'Mr X';
 let obj = {
   name: 'Joe Lopez',
   greet: function greet(whom) {
+	console.log(this) 
     console.log(this.name + ' salue ' + whom);
   },
   greetAll: function greetAll(first, second, last) {
+	console.log(this)
     [first, second, last].forEach(this.greet);
   }
 };
@@ -695,7 +682,7 @@ obj.greet("les lopezs de France");
 // => 'Joe Lopez salut les lopezs de France !'
 let fx = obj.greet;
 fx("l’atelier") // => '"Mr X salue l’atelier"'
-obj.greetAll('David', 'Joe'); // => 'Mr X salue David, Mr X salue Joe, Mr X salue undefined'
+obj.greetAll('David', 'Joe', 'Guénolé'); // => 'Mr X salue David, Mr X salue Joe, Mr X salue undefined'
 						</code>
 					</pre>
 				</section>
@@ -734,19 +721,18 @@ const obj = {
 					<pre>
 						<code class='javascript'>
 
-// fx.call(ctx[, arg1[, arg2…]])
 
-let fx = obj.greet;
-fx.call(obj, 'les singes')
+//let fx = obj.greet;
+fx.call(obj, 'les singes') // Joe Lopez salue les singes
 
-let x = { 0: 'Zero', 1: 'One', length: 2 };
-Array.prototype.join.call(x, '-') // 'Zero-One'
 
-// fx.apply(ctx[, argArray]) -- Gros potentiel d’astuces !
+let xy = { 0: 'Zero', 1: 'One', length: 2 };
+Array.prototype.join.call(xy, '-') // 'Zero-One'
+
 
 fx.apply(obj, ['']) // => 'Joe salue l’atelier'
-Array.prototype.push.apply(x, ['Two', 'Three', 'Four']) // => 5
-x // => { 0: 'Zero', 1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', length: 5 }
+Array.prototype.push.apply(xy, ['Two', 'Three', 'Four']) // => 5
+xy // => { 0: 'Zero', 1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', length: 5 }
 </code>
 </pre>
 

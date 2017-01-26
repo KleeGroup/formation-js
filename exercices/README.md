@@ -42,8 +42,7 @@ const superbeObjet = {
 
 superbeObjet.direBonjour();
 superbeObjet.direBonjour.call({});
-superbeObjet.direBonjour.bind({name: 'Thomas'})();
-superbeObjet.direBonjour.bind({name: 'Thomas'}).call({}));
+superbeObjet.direBonjour.call({name: 'Thomas'});
 ```
 Comment expliquez-vous les résultats obtenus ?
 
@@ -69,7 +68,7 @@ Promise.resolve({nom : 'Bazire', autre: {statut : 'Stagiaire', entreprise: 'Klee
 
 3 - Ecrire une fonction recevant en entrée la promesse suivante,
 ```javascript
-Promise.resolve([{nom : 'Bazire', statut : 'Stagiaire', entreprise: 'Klee'}, {nom : 'Pierre', statut : 'FocusPapa', entreprise: 'Klee'}, {nom:'Stan', statut :'Mascotte', entreprise:'Ailleurs'})
+Promise.resolve([{nom : 'Bazire', statut : 'Stagiaire', entreprise: 'Klee'}, {nom : 'Pierre', statut : 'FocusPapa', entreprise: 'Klee'}, {nom:'Stan', statut :'Mascotte', entreprise:'Ailleurs'}])
 ```
 et qui renvoie une promesse du type 
 ```javascript
