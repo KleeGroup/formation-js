@@ -48,8 +48,8 @@
 
 	<div class="reveal">
 		<div class="slides">
-			<section id="part-1" data-background='#ffe599'><h1>Javascript</h1><a href='http://get-focus.github.io/formation-js/#/'>http://kleegroup.github.io/formation-js/#/</a></section>
-			<section>
+			<section  data-background='#ffe599'><h1>Javascript</h1><a href='http://get-focus.github.io/formation-js/#/'>http://kleegroup.github.io/formation-js/#/</a></section>
+			<section id="part-1">
 				<section>
 					<h1>Présentation</h1>
 				</section>
@@ -104,17 +104,140 @@
 			</section>
 
 			<section id="part-2">
-				<section ><h1>Les bases</h1></section>
-				<section><h1>Types primitifs</h1></section>
-				<section><h1>Objets</h1></section>
-				<section><h1>Strings</h1></section>
+				<section >
+					<h1>Les bases</h1>
+				</section>
 				<section>
-					<h1>Tableaux</h1>
+					<h1>Types primitifs</h1>
+					<p>Il y a 6 <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Structures_de_donn%C3%A9es#Le_type_ind.C3.A9fini">types primitifs</a> en Javascript:</p>
+
+
+					<ul>
+						<li><b>boolean</b>: résultat d'une assertion logique <i>true</i> ou <i>false</i></li>
+						<li><b>null</b>: ne possède qu'une unique valeur <i>null</i></li>
+						<li><b>undefined</b>: représente la non-affectation d'une variable</li>
+						<li><b>number</b>: contient l'ensemble des valeur numéraire (entier, float, NaN, +Infinity, - Infinity)</li>
+						<li><b>string</b>: représente une chaine de caractère à partir d'un ensemble d'élements 16bits non-signés</li>
+						<li><b>symbol</b>: type de données unique et inchangeable (souvent utilisé pour créer des identifiants)</li>
+					</ul>
+					<p>Tout le reste est "Objet" (oui oui même les tableaux...)</p>
+					<p>Un objet avec une "call signature" est une fonction</p>
+				</section>
+				<section>
+						<h1>Objets</h1>
+						<p>JavaScript est conçu autour d'un paradigme simple, basé sur les <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Utiliser_les_objets">objets</a>.</p>
+						<p>Un objet est un ensemble de propriétés et une propriété est une association entre un nom (aussi appelé clé) et une valeur.</p>
+						<p>La valeur d'une propriété peut être une fonction, auquel cas la propriété peut être appelée « méthode ».</p>
+				</section>
+				<section>
+					<h1>Objets</h1>
+					<pre>
+							<code class='javascript'>
+/// Création d'un objet
+const obj = { first: 'David', last: 'Lopez', age: 77 };
+/// Utilisation des propriétés
+obj.first  // => 'David'
+obj['age'] // => 77
+/// Affectation d'une valeur à une propriété
+obj.first = 'pierr';
+obj.first // => 'pierr'
+/// Attention si votre clé de propriété est un nombre!
+obj[77] = 'roberto';
+obj[77]   // => 'roberto'
+obj['77'] // => 'roberto'
+obj.77    // => SyntaxError
+/// Parce que je fais ce que je veux depuis ES2016 :p
+obj['a'+ 12] = 'Gino';
+obj.a12;
+							</code>
+						</pre>
+				</section>
+				<section>
+					<h1>Strings</h1>
+					<p>Le type <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Formatage_du_texte">String</a> de JavaScript est utilisé pour représenter des données textuelles.</p>
+					<p>C'est un ensemble d'"éléments" de valeurs non signées sur 16 bits (unités de codage UTF-16).</p>
+					<p>Chaque élément dans la chaîne de caractères occupe une position dans la chaîne de caractères. Le premier élément se trouve à l'indice 0, le suivant à l'indice 1 et ainsi de suite.</p>
+					<p>La longueur d'une chaîne de caractères est le nombre d'éléments qu'elle contient.</p>
+					<p>Une String est <b>immuable</b> il est impossible de la modifier une fois créée. Il est cependant possible de recréer une string à partir d'une autre string.</p>
+				</section>
+				<section>
+						<h1>Strings</h1>
+						<pre>
+								<code class='javascript'>
+var maString = 'Hello World!';
+maString.length // => 12
+maString[0] // => 'H'
+maString[0] = 'X'; // Aucun effet. une string est immuable
+maString[0] // => 'H'
+/// Quelques fonctions
+'déjà'.localeCompare('demain') // => -1 'déjà' est alphabétiquement avant 'demain'
+'déjà !'.toLocaleUpperCase()      // => 'DÉJÀ !' Renvoie une nouvelle instance en majuscule
+'ÇA POUTRE'.toLocaleLowerCase()   // => 'ça poutre' Renvoie une nouvelle instance en minuscule
+'one,two,three'.split(',')        // => ['one', 'two', 'three'] trnsformation en tableau selon un séparateur
+'one,,two,three'.split(/\W+/)     // => ['one', 'two'] transformation en tableau selon une expression régulière
+'hello'.substring(1)      // => 'ello' renvoie une nouvelle instance d'une partie de la chaine
+'hello'.slice(1, -2)      // => 'el' -> [1;length-2[
+								</code>
+							</pre>
+				</section>
+				<section>
+					<h1>Les tableaux</h1>
+					<p>Un <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Collections_index%C3%A9es">Array</a> est un ensemble ordonné de valeurs auxquelles on peut faire référence avec un nom et un indice.</p>
+					<p>JavaScript ne possède pas de type particulier pour représenter un tableau. En revanche, il est possible d'utiliser l'objet natif <i>Array</i> ainsi que ses méthodes pour manipuler des tableaux</p>
+				</section>
+				<section>
+						<h1>Les tableaux</h1>
+						<pre>
+						<code class='javascript'>
+let names = ['John', 'David', 'Rodrigo'];
+
+names.length
+// => 3
+
+names[0]
+// => 'John'
+
+names[12] = 'Pierre';
+names.length
+// => 13
+
+names[9]
+// => undefined (comme 10 et 11): c'est appelé "sparse array"
+								</code>
+							</pre>
+				</section>
+				<section>
+					<h1>Les tableaux</h1>
+					<pre>
+						<code class='javascript'>
+let data = [1, 2, 3];
+
+// arr1.concat(arg…) -> arr2 [déroule sur 1 niveau, ni "shallow" ni "deep"]
+data.concat(4, 5, 6)     // => [1, 2, 3, 4, 5, 6]
+data.concat([4, 5, 6])   // => [1, 2, 3, 4, 5, 6]
+data.concat(4, [5, 6])   // => [1, 2, 3, 4, 5, 6]
+data.concat([4, [5, 6]]) // => [1, 2, 3, 4, [5, 6]] -- 2 niveaux !
+data                     // => [1, 2, 3] -- intact !
+
+// arr.join([sep = ',']) -> String
+data.join()   // => '1,2,3'
+data.join('') // => '123' -- Fréquent en construisant du HTML
+
+// arr1.slice(signedBegin[, signedEnd = length]) -> arr2 -- négatif ok partout !
+data.slice(1)      // => [2, 3]
+data.slice(1, 1)   // => []
+data.slice(1, 2)   // => [2]
+data.slice(1, -1)  // => [2]
+data.slice(-2)     // => [2, 3]
+data.slice(-2, 2)  // => [2]
+data.slice(-2, -1) // => [2]
+						</code>
+					</pre>
 				</section>
 				<section><h1>Dates</h1></section>
 				<section><h1>Operateurs</h1></section>
-				<section><h1>truthy/falsy</h1></section>
-				<section><h1>Destruct</h1></section>
+				<section><h1>Truthy / Falsy</h1></section>
+				<section><h1>Destructing / Spreading</h1></section>
 				<section><h1>Interpolation de strings</h1></section>
 				<section><h1>Pièges</h1></section>
 			</section>
@@ -125,6 +248,7 @@
 				</section>
 				<section id="part-3-2">
 					<h1>Variables</h1>
+					<!-- Typage dynamiques-->
 				</section>
 				<section id="part-3-3">
 					<h1>Scope</h1>
@@ -228,24 +352,6 @@
 
 				</section>
 				<section>
-					<h2>Les strings</h2>
-					<pre>
-						<code class='javascript'>
-'déjà' < 'demain'              // => false
-'déjà'.localeCompare('demain') // => -1 ('déjà' avant 'demain')
-
-'déjà !'.toLocaleUpperCase()      // => 'DÉJÀ !'
-'ÇA POUTRE'.toLocaleLowerCase()   // => 'ça poutre'
-
-'one,two,three'.split(',')        // => ['one', 'two', 'three']
-'one,,two,three'.split(/\W+/)     // => ['one', 'two']
-
-'hello'.substring(1)      // => 'ello'
-'hello'.slice(1, -2)      // => 'el' -> [1;length-2[
-						</code>
-					</pre>
-				</section>
-				<section>
 					<h2>Les dates</h2>
 					<pre>
 						<code class='javascript'>
@@ -292,21 +398,7 @@ Date.UTC(y, m, d, h, mn, s, ms) // => numérique
 
 				<section>
 					<h2>Les objets</h2>
-					<pre>
-						<code class='javascript'>
-let obj = { first: 'David', last: 'Lopez', age: 77 };
-obj.first  // => 'David'
-obj['age'] // => 42
 
-obj.first = 'pierr';
-obj['first'] // => 'pierr'
-
-obj[77] = 'roberto';
-obj[77]   // => 'roberto'
-obj['77'] // => 'roberto'
-obj.77    // => SyntaxError
-						</code>
-					</pre>
 				</section>
 				<section>
 					<h2>Les objets avec ES6</h2>
@@ -323,53 +415,8 @@ trainers.a12;
 					<pre>
 				</section>
 				<section>
-					<h2>Les tableaux</h2>
-					<pre>
-						<code class='javascript'>
-let names = ['John', 'David', 'Rodrigo'];
 
-names.length
-// => 3. R/W : astuce pour réutiliser un tableau!
-
-names[0]
-// => 'John'
-
-names[12] = 'Pierre';
-names.length
-// => 13
-
-names[9]
-// => undefined (comme 10 et 11): c'est appelé "sparse array"
-						</code>
-					</pre>
-				</section>
-				<section>
-					<pre>
 						<h2>Les tableaux</h2>
-						<code class='javascript'>
-let data = [1, 2, 3];
-
-// arr1.concat(arg…) -> arr2 [déroule sur 1 niveau, ni "shallow" ni "deep"]
-data.concat(4, 5, 6)     // => [1, 2, 3, 4, 5, 6]
-data.concat([4, 5, 6])   // => [1, 2, 3, 4, 5, 6]
-data.concat(4, [5, 6])   // => [1, 2, 3, 4, 5, 6]
-data.concat([4, [5, 6]]) // => [1, 2, 3, 4, [5, 6]] -- 2 niveaux !
-data                     // => [1, 2, 3] -- intact !
-
-// arr.join([sep = ',']) -> String
-data.join()   // => '1,2,3'
-data.join('') // => '123' -- Fréquent en construisant du HTML
-
-// arr1.slice(signedBegin[, signedEnd = length]) -> arr2 -- négatif ok partout !
-data.slice(1)      // => [2, 3]
-data.slice(1, 1)   // => []
-data.slice(1, 2)   // => [2]
-data.slice(1, -1)  // => [2]
-data.slice(-2)     // => [2, 3]
-data.slice(-2, 2)  // => [2]
-data.slice(-2, -1) // => [2]
-						</code>
-					</pre>
 				</section>
 				<section>
 					<pre>
