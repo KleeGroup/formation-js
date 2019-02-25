@@ -36,6 +36,11 @@
 	<link href='https://fonts.googleapis.com/css?family=Merriweather:700|Source+Sans+Pro:300,600,300italic,600italic|Source+Code+Pro:400,600' rel='stylesheet' type='text/css'>
 
 
+	<style>
+	.reveal {
+	font-size: 30px;
+	}
+	</style>
 </head>
 
 <body>
@@ -45,15 +50,56 @@
 		<div class="slides">
 			<section id="part-1" data-background='#ffe599'><h1>Javascript</h1><a href='http://get-focus.github.io/formation-js/#/'>http://kleegroup.github.io/formation-js/#/</a></section>
 			<section>
-				<section><h1>Présentation</h1></section>
 				<section>
-					<h1>Les bases du langage</h1>
+					<h1>Présentation</h1>
+				</section>
+				<section>
+					<h1>Kesako?</h1>
+					<ul>
+						<li>Langage créé en 1995 pour réaliser des petits scripts dans des pages Web dans le but de les dynamiser</li>
+						<li>Le langage respecte l'ensemble des paradigme orienté objet, et est basé sur un principe de <i>prototype</i></li>
+						<li>Langage nativement supporté par tous les navigateurs Web, ce qui le rend extrèmement populaire</li>
+						<li>Chaque navigateur à cependant son propre moteur JS</li>
+					</ul>
 				</section>
 				<section>
 					<h1>De l'utilisation du JS</h1>
+					<ul>
+							<li>Utilisation au sens premier du langage: dynamiser une page HTML avec quelques scripts côté client</li>
+							<li>Utilisation de Jquery: simplification de fonction complexe (écoute d'vènement, manipulation du DOM ...)</li>
+							<li>Attention! <mark>JS !== JQuery</mark></li>
+							<li>Avènement des SPA: React, Angular, Backbone, Vue ...</li>
+							<li>Multiplication des usages
+								<ul>
+									<li>Application desktop (Electron)</li>
+									<li>Application mobile (Cordova, Phonegap)</li>
+									<li>Application mobile "native" (React native)</li>
+									<li>Serveur web (NodeJS)</li>
+									<li>...</li>
+								</ul>
+							</li>
+						</ul>
 				</section>
 				<section>
-					<h1>ECMAScript</h1>
+					<h1>Standard ECMAScript (ECMA-262)</h1>
+					<p>Il s'agit des normes Javascript écrites au cours des années.</p>
+					<table>
+						<tr><td>ES5 (2009)</td><td>version la plus connu, supportée par tous les navigateurs</td> </tr>
+						<tr><td>ES 2016</td><td>Ajoute énormément de modification au langage</td> </tr>
+						<tr><td>ES 2017</td><td>version actuelle de la norme très semblable à 2016</td> </tr>
+						<tr><td>ES next</td><td>version destinée à devenir la nouvelle norme</td> </tr>
+					</table>
+
+					<blockquote>On voit beaucoup de « ES7 » ou « ES8 » qui traînent : en général ça fait référence à l’« ES next » du moment.</blockquote>
+				</section>
+				<section>
+					<h1>Transpilage</h1>
+					<p>Le langage évoluant rapidement (tous les ans depuis 2015), les moteurs JS ne suivent pas toujours. Une étape de transpilage nous permet d'écrire notre code
+						avec toutes les avancées du langages, et rend cela compréhensible pour les différents moteurs JS</p>
+						<ul>
+							<li>Babel: Implémente les normes ES2017 et ESnext, les publie sous forme de module pour le développeur.</li>
+							<li>TypeScript: Implemente tout ou parti des normes ES2017 et ESnext. Ajoute un sucre syntaxique de typage pour le langage, ainsi qu'un jeu de fonctions avancées propre à ce typage.</li>
+						</ul>
 				</section>
 			</section>
 
