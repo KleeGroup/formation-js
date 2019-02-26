@@ -148,7 +148,7 @@ obj['77'] // => 'roberto'
 obj.77    // => SyntaxError
 /// Parce que je fais ce que je veux depuis ES2016 :p
 obj['a'+ 12] = 'Gino';
-obj.a12;
+obj.a12; // => 'Gino' évidemment ;)
 							</code>
 						</pre>
 				</section>
@@ -170,6 +170,7 @@ maString[0] // => 'H'
 maString[0] = 'X'; // Aucun effet. une string est immuable
 maString[0] // => 'H'
 /// Quelques fonctions
+'déjà' < 'demain' // => false Cette comparaison ne fait pas du tout ce que vous pensez!
 'déjà'.localeCompare('demain') // => -1 'déjà' est alphabétiquement avant 'demain'
 'déjà !'.toLocaleUpperCase()      // => 'DÉJÀ !' Renvoie une nouvelle instance en majuscule
 'ÇA POUTRE'.toLocaleLowerCase()   // => 'ça poutre' Renvoie une nouvelle instance en minuscule
@@ -387,7 +388,7 @@ date.getMilliseconds() // "Milliseconds", un seul mot : une seule initiale.
 "true"&true => 0 // le & binaire renvoie le bit 0...
 "1" == true => true // bah oui après converstion "1" => 1 => true donc égale à true...
 					</code></pre>
-					<blockquote>Globalement les valeur suivant sont Falsy: <i>false, undefined, null, "", 0, NaN</i>. Le reste est Truthy.</blockquote>
+					<blockquote>Globalement les valeurs suivantes sont Falsy: <i>false, undefined, null, "", 0, NaN</i>. Le reste est Truthy.</blockquote>
 				</section>
 				<section>
 					<h1>Destructuring  / Spreading</h1>
@@ -563,49 +564,6 @@ Et le javascript c'était pas mieux avant!`;
 
 > A retenir on utilise `const` au maximum et `let` dans les autres cas
 
-				</section>
-				<section>
-					<h2>Les dates</h2>
-					<pre>
-						<code class='javascript'>
-// "J'ai bien lu la doc"
-date.getTime()  // => ex. 1290852603042
-
-// "#superSmart"
-+date
-
-// Et sinon…
-new Date(1301733937452)
-
-// Mais aussi (car souci pour partir de composantes UTC) :
-Date.UTC(y, m, d, h, mn, s, ms) // => numérique
-
-						</code>
-					</pre>
-				</section>
-				<section>
-					<blockquote>
-						A retenir : Momentjs (on voit ça plus tard...)
-					</blockquote>
-				</section>
-
-				<section>
-					<h2>Les objets</h2>
-
-				</section>
-				<section>
-					<h2>Les objets avec ES6</h2>
-					<pre>
-						<code class='javascript'>
-let defaults = { first: 'John', last: 'Doe', age: 42 };
-let trainer  = { last: 'Smith', age: 35 };
-trainer      = { ...defaults, ...trainer, age: 36 }
-// => { first: 'John', last: 'Smith', age: 36 }
-trainers['a'+ 12] = 'Gino';
-trainers.a12;
-// Gino
-						</code>
-					<pre>
 				</section>
 				<section>
 
