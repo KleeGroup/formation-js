@@ -234,12 +234,163 @@ data.slice(-2, -1) // => [2]
 						</code>
 					</pre>
 				</section>
-				<section><h1>Dates</h1></section>
-				<section><h1>Operateurs</h1></section>
-				<section><h1>Truthy / Falsy</h1></section>
+				<section>
+					<h1>Dates</h1>
+					<p>JavaScript ne possède pas de type primitif pour représenter des dates. Cependant l'objet Date et ses méthodes permettent de manipuler des dates et des heures au sein d'une application.</p>
+					<p>L'objet <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Nombres_et_dates#L'objet_Date">Date</a> possède de nombreuses méthodes pour définir, modifier, obtenir des dates. Il ne possède pas de propriétés</p>
+					<p>JavaScript gère les dates de façon similaire à Java. (Donc assez mal...)</p>
+					<p>Les dates sont représentées selon les nombres de millisecondes écoulées depuis le premier janvier 1970 à 00h00:00.
+							L'objet Date permet de représenter des dates allant de -100 000 000 jours jusqu'à +100 000 000 jours par rapport au premier janvier 1970 UTC.</p>
+				</section>
+				<section>
+						<h1>Dates</h1>
+						<pre>
+								<code class='javascript'>
+new Date()                  //  maintenant !
+new Date(y,m,d[,h,m,s,ms]) // Valeur découpée. (un peu lourd...)
+
+date.getYear() // JAMAIS #Bug de l'an 2000 exemple: L'année 1976 renverra 76. Mais l'année 2016 renverra 116. -_-'
+date.getFullYear()	// Mieux mais pas vraiment logique dans le nom...
+date.getMonth()     // NAZE Java-like qui démarre à… zéro (janvier). #ugly
+date.getDay()       // PERDUUUU ! C'est le DOW (Day Of Week), 0 = dim., 6 = sam
+date.getDate()      // Le jour du mois.  Super logique.
+date.getHours()
+date.getMinutes()
+date.getSeconds()
+date.getMilliseconds() // "Milliseconds", un seul mot : une seule initiale.
+
+// Heure locale du navigateur/système.  On a les mêmes en getUTCXxx()…
+								</code>
+							</pre>
+							<blockquote>Vous avez le choix dans l'implémentation de la date...<br/> De manière générale on préferera utiliser des library de dates type <i>moment.js</i> pour gérer des dates.</blockquote>
+					</section>
+				<section>
+					<h1>Operateurs</h1>
+					<table>
+							<tr>
+								<td>==</td>
+								<td>true si les opérandes sont égaux après conversion en valeurs de mêmes types</td>
+							</tr>
+							<tr>
+								<td>!=</td>
+								<td>true si les opérandes sont différents.</td>
+							</tr>
+							<tr>
+								<td>===</td>
+								<td>true si les opérandes sont égaux et de même type. </td>
+							</tr>
+							<tr>
+								<td>!==</td>
+								<td>true si les opérandes ne sont pas égaux ou pas de même type.</td>
+							</tr>
+							<tr>
+								<td>></td>
+								<td>true si l'opérande gauche est supérieur (strictement) à l'opérande droit.</td>
+							</tr>
+							<tr>
+								<td>>=</td>
+								<td>true si l'opérande gauche est supérieur ou égal à l'opérande droit.</td>
+							</tr>
+							<tr>
+								<td><</td>
+								<td>true si l'opérande gauche est inférieur (strictement) à l'opérande droit.</td>
+							</tr>
+							<tr>
+								<td><=</td>
+								<td>true si l'opérande gauche est inférieur ou égal à l'opérande droit.</td>
+							</tr>
+					</table>
+				</section>
+				<section>
+						<h2>Quelques pièges de comparaisons en JS ...</h2>
+						<pre>
+							<code class='javascript'>
+	== ou === ?!
+
+	42 == '42'        // => true  --
+	null == undefined // => true  --
+	null == 0         // => false --
+	0 == undefined    // => false --
+	0 == false        // => true  --
+	1 == true         // => true  --
+	42 == true        // => false --
+	'0' == false      // => true  --
+	'' == false       // => true  --
+	NaN == NaN        // => false --
+							</code>
+						</pre>
+						<blockquote>C'est franchement sale...</blockquote>
+					</section>
+					<section>
+						<h2>Pour éviter les écueils, utiliser ===</h2>
+						<pre>
+							<code class='javascript'>
+	// avec ===, fini de jouer : vérif valeur ET TYPE !
+
+	42 === '42'        // => false
+	null === undefined // => false
+	null === 0         // => false
+	0 === undefined    // => false
+	0 === false        // => false
+	'0' === false      // => false
+	NaN === NaN        // => false -- rien à faire !
+							</code>
+						</pre>
+						<blockquote>Toujours utiliser la comparaison stricte === et !==</blockquote>
+				</section>
+				<section>
+					<h1>Opérateurs</h1>
+					<p>Les opérateurs javascripts font des conversions implicites.</p>
+					<p>Le javascript ne plantera jamais sur une opération. En revanche il peut vous renvoyer une valeur native comme <i>Nan</i>, <i>+Infinity</i> etc.</p>
+					<pre><code class='javascript'>
+	!42  => false
+	!!42  => true //pratique pour convertir n'importe quelle valeur en booleen
+	+'2'  => 2
+	"lala" + 42 => "lala42"
+	1/0 => Infinity
+	"lala" - 42 => NaN
+
+	{} + [] => 0 // Hum ok...
+	[] + {} => "[object Object]" // parce que why not!
+	{} + {} => "[object Object][object Object]" // Bon ça je veux bien
+	[] + [] => "" // Nan mais les gars...
+	[] - {} => NaN // -_-'
+	+[] => 0 // Ah ah
+	+[] + [] => "0" // Vous l'avez?
+	+[] + +[] => 0 // Bon ok j'arrete :=)
+					</code></pre>
+				</section>
+				<section>
+					<h1>Opérateurs logiques</h1>
+					<p>Ces opérateurs servent à resoudre des expressions logique en prenant en compte le caractère <i>"Truthy"</i> ou <i>"Falsy"</i> des valeurs de l'expression</p>
+					<table>
+						<tr>
+							<td>&&</td>
+							<td>ET logique. Vrai si les deux expressions ont des valeur <i>Truthy</i>. S'arrête à la première valeur <i>Falsy</i></td>
+						</tr>
+						<tr>
+							<td>||</td>
+							<td>OU logique. Vrai si une des deux expressions a une valeur <i>Truthy</i>. S'arrête à la première valeur <i>Truthy</i></td>
+						</tr>
+						<tr>
+								<td>!</td>
+								<td>NON logique. Vrai si une l'expression a une valeur <i>Truthy</i>. Faux sinon.</td>
+							</tr>
+					</table>
+					<blockquote>Attention les opérateurs logiques <i>&&</i>, <i>||</i> et <i>!</i> fonctionnent différemment des opérateurs binaire <i>&</i>, <i>|</i> et <i>~</i>. <br/>Pour plus d'info: <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Expressions_et_Op%C3%A9rateurs#Op%C3%A9rateurs_binaires">La doc MDN</a></a></blockquote>
+				</section>
+				<section>
+					<h1>Truthy / Falsy</h1>
+					<pre><code class="javascript">
+"true" == true => false // la chaine de caratère "true" même après conversion n'est pas égale à true.
+"true" && true => true // la chaine de caratère "true" pour ce qui est des expression logique!!
+"true"&true => 0 // le & binaire renvoie le bit 0...
+"1" == true => true // bah oui après converstion "1" => 1 => true donc égale à true...
+					</code></pre>
+				</section>
+
 				<section><h1>Destructing / Spreading</h1></section>
 				<section><h1>Interpolation de strings</h1></section>
-				<section><h1>Pièges</h1></section>
 			</section>
 
 			<section id="part3">
@@ -355,26 +506,6 @@ data.slice(-2, -1) // => [2]
 					<h2>Les dates</h2>
 					<pre>
 						<code class='javascript'>
-new Date                   //  maintenant !
-new Date(y,m,d[,h,m,s,ms]) // Valeur découpée. (un peu lourd...)
-
-date.getFullYear()  // JAMAIS
-date.getMonth()     // NAZE Java-like qui démarre à… zéro (janvier). #ugly
-date.getDay()       // PERDUUUU ! C'est le DOW (Day Of Week), 0 = dim., 6 = s
-date.getDate()      // Le jour du mois.  Super logique.
-date.getHours()
-date.getMinutes()
-date.getSeconds()
-date.getMilliseconds() // "Milliseconds", un seul mot : une seule initiale.
-
-// Heure locale du navigateur/système.  On a les mêmes en getUTCXxx()…
-						</code>
-					</pre>
-				</section>
-				<section>
-					<h2>Les dates</h2>
-					<pre>
-						<code class='javascript'>
 // "J'ai bien lu la doc"
 date.getTime()  // => ex. 1290852603042
 
@@ -484,42 +615,6 @@ function maFonction() {
 maFonction() // test;
 const a = () => 'test';
 a(); //test
-						</code>
-					</pre>
-				</section>
-
-				<section>
-					<h2>Quelques pièges de comparaisons en JS ...</h2>
-					<pre>
-						<code>
-== ou === ?!
-
-42 == '42'        // => true  --
-null == undefined // => true  --
-null == 0         // => false --
-0 == undefined    // => false --
-0 == false        // => true  --
-1 == true         // => true  --
-42 == true        // => false --
-'0' == false      // => true  --
-'' == false       // => true  --
-NaN == NaN        // => false --
-						</code>
-					</pre>
-				</section>
-				<section>
-					<h2>Pour éviter les écueils, utiliser ===</h2>
-					<pre>
-						<code>
-// avec ===, fini de jouer : vérif valeur ET TYPE !
-
-42 === '42'        // => false
-null === undefined // => false
-null === 0         // => false
-0 === undefined    // => false
-0 === false        // => false
-'0' === false      // => false
-NaN === NaN        // => false -- rien à faire !
 						</code>
 					</pre>
 				</section>
