@@ -457,24 +457,116 @@ Et le javascript c'était pas mieux avant!`;
 			</section>
 
 			<section id="part3">
-				<section id="part-3-1">
+				<section>
 					<h1>Les fonctions</h1>
+					<p>Les fonctions sont un peu la base de toute programmation... Le Javascript n'échappe pas à la règle.</p>
+					<p>En JavaScript, les fonctions sont des objets de première classe. Cela signifie qu'elles peuvent être manipulées et échangées, qu'elles peuvent avoir des propriétés et des méthodes, comme tous les autres objets JavaScript. Les fonctions sont des objets <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Fonctions">Function</a></p>
+					<p>Afin de renvoyer une valeur, la fonction doit comporter une instruction return. Une fonction qui ne renvoie pas de valeur retourne undefined.</p>
 				</section>
-				<section id="part-3-2">
+				<section>
+					<h1>Déclaration</h1>
+					<pre>
+						<code class="javascript">
+/// Fonction standard
+function a() {
+	/// this = contexte appelant
+}
+/// Variable fonction anonyme (ne pas utiliser)
+const b = function() {
+	/// this = contexte appelant
+}
+/// Variable fonction nommée (usage assez rare)
+const c = function c() {
+	/// this = contexte appelant
+}
+/// Lambda / "fat arrow" (anonyme)
+const d = () => {
+	/// this = contexte de la déclaration
+}
+/// fonction auto-appelante (usage particulier)
+(function(){
+	/// this = contexte appelant
+})()
+						</code>
+					</pre>
+				</section>
+				<section>
+						<h1>Déclaration</h1>
+						<pre>
+							<code class="javascript">
+/// La syntaxe de a est un raccourci pour celle de b. (usage assez rare)
+const e {
+    a() {
+        /// this = contexte appelant
+    },
+    b: function b() {
+        /// this = contexte appelant
+    }
+}
+/// Dans une classe
+class G {
+    a() {
+        /// this = contexte appelant
+		}
+		/// Variable d'instance
+    b = () => {
+        /// this = instance de la classe
+    }
+}
+							</code>
+						</pre>
+					</section>
+				<section>
 					<h1>Variables</h1>
-					<!-- Typage dynamiques-->
 				</section>
-				<section id="part-3-3">
+				<section>
+						<h1>Boucles</h1>
+				</section>
+				<section>
 					<h1>Scope</h1>
 				</section>
-				<section id="part-3-4">
-					<h1>Déclaration</h1>
-				</section>
-				<section id="part-3-5">
-					<h1>Boucles</h1>
-				</section>
-				<section id="part-3-6">
+				<section>
 					<h1>Closure</h1>
+					<p>Il est possible d'imbriquer une fonction au sein d'une fonction. La fonction imbriquée (interne) est privée par rapport à la fonction (externe) qui la contient. Cela forme ce qu'on appelle une <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Fonctions#Fonctions_imbriqu%C3%A9es_et_fermetures">Closure</a>.</p>
+					<p>Étant donné qu'une fonction imbriquée est une closure, cela signifie que la fonction imbriquée peut « hériter » du scope de la fonction parente. Et donc avoir accès aux variables de cette fonction.</p>
+				</section>
+				<section>
+						<h1>Closure</h1>
+						<pre><code class="javascript">
+function externe(x) {
+	function interne(y) {
+			return x + y;
+	}
+	return interne;
+}
+var fn_interne = externe(3); // fn_interne est donc une fonction qui prend en parametre y en renvoie 3 + y
+var resultat = fn_interne(5); // donc 8
+
+var resultat1 = externe(3)(5); // renvoie 8
+						</code></pre>
+				</section>
+				<section>
+					<h1>Closure</h1>
+					<pre>
+							<code class='javascript'>
+function publicFx() {
+	let dateAppel = Date.now();
+	return function() { console.log(dateAppel); };
+}
+let privilegedFx1 = publicFx();
+// Attendre un bref instant
+let privilegedFx2 = publicFx();
+
+// privilegedFx(1,2) sont en fait les fonctions internes construites au
+// sein de publicFx, qui grâce aux règles de portée "voient"
+// dateAppel.  Elles sont *closed over* par publicFx, ce qui fait
+// que les valeurs de dateAppel au moment où les fonctions ont été
+// renvoyéees sont préservées
+privilegedFx1(); // => affiche la dateAppel du moment de la création de la fonction privilegedFx1!
+privilegedFx2(); // => affiche la dateAppel d'après !
+							</code>
+						</pre>
+						<blockquote>Les closures sont un bon moyen de rendre privée une partie du code. Elles seront très utiles pour créer des modules. Mais on y reviendra plus tard...</blockquote>
 				</section>
 				<section id="part-3-7">
 					<h1>Binding</h1>
@@ -918,25 +1010,7 @@ davidLopez.toString() // => "#Person David Lopez"
 				<section data-background=''><h1>Closure</h1></section>
 				<section >
 					<h2>Closure simple</h2>
-					<pre>
-						<code class='javascript'>
-function publicFx() {
-  let dateAppel = Date.now();
-  return function() { console.log(dateAppel); };
-}
-let privilegedFx1 = publicFx();
-// Attendre un bref instant
-let privilegedFx2 = publicFx();
 
-// privilegedFx(1,2) sont en fait les fonctions internes construites au
-// sein de publicFx, qui grâce aux règles de portée "voient"
-// dateAppel.  Elles sont *closed over* par publicFx, ce qui fait
-// que les valeurs de dateAppel au moment où les fonctions ont été
-// renvoyéees sont préservées
-privilegedFx1(); // => affiche la dateAppel du moment de la création de la fonction privilegedFx1!
-privilegedFx2(); // => affiche la dateAppel d'après !
-						</code>
-					</pre>
 				</section>
 				<section>
 					<h2>Les modules sont une utilisation des closures</h2>
