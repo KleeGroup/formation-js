@@ -85,8 +85,9 @@
 					<p>Il s'agit des normes Javascript écrites au cours des années.</p>
 					<table>
 						<tr><td>ES5 (2009)</td><td>version la plus connu, supportée par tous les navigateurs</td> </tr>
-						<tr><td>ES 2016</td><td>Ajoute énormément de modification au langage</td> </tr>
-						<tr><td>ES 2017</td><td>version actuelle de la norme très semblable à 2016</td> </tr>
+						<tr><td>ES 2015 (ES6)</td><td>Ajoute énormément de modification au langage</td> </tr>
+						<tr><td>...</td><td>Evolution annuele de la norme</td> </tr>
+						<tr><td>ES 2019</td><td>version actuelle de la norme</td> </tr>
 						<tr><td>ES next</td><td>version destinée à devenir la nouvelle norme</td> </tr>
 					</table>
 
@@ -445,7 +446,6 @@ g(objet2);
 					<p>Les nouvelles normes ECMAScript ont permis de faire évoluer le langages et de fournir un moyen de manipuler les strings. Il est désormais possible de créer des chaine de caractères multiligne et paramétrables!</p>
 					<pre>
 							<code class="javascript">
-
 const person = {nom: Ingargiola, prenom: Thibault};
 
 const stringAvant = 'Bonjour je suis ' + person.prenom + ' ' + person.nom;
@@ -455,7 +455,6 @@ Et le javascript c'était pas mieux avant!`;
 						</pre>
 				</section>
 			</section>
-
 			<section id="part3">
 				<section>
 					<h1>Les fonctions</h1>
@@ -518,12 +517,64 @@ class G {
 					</section>
 				<section>
 					<h1>Variables</h1>
+					<p>Il existe trois façons de déclarer des variable en javascript:</p>
+					<ul>
+						<li>var: On déclare une variable, éventuellement en initialisant sa valeur.</li>
+						<li>let: On déclare une variable dont la portée est celle du bloc courant, éventuellement en initialisant sa valeur.</li>
+						<li>const: On déclare une constante nommée, dont la portée est celle du bloc courant, accessible en lecture seule.</li>
+					</ul>
+					<blockquote>var n'est plus vraiment utilisé dans les nouvelles normes. On préfèrera utiliser const dans les 3/4 des cas, et let dans les cas ou la variables est réaffectable.</blockquote>
 				</section>
 				<section>
 						<h1>Boucles</h1>
+						<p>Depuis ECMAScript2015 le prototype ARRAY a gagné de nouvelles méthode d'itération sur les éléments. Nous allons en présenter deux ici:</p>
+						<table>
+							<tr>
+								<td>map</td>
+								<td>immutable</td>
+								<td>Crée un nouveau tableau avec les résultats de l'appel d'une fonction fournie sur chaque élément du tableau appelant.</td>
+							</tr>
+							<tr>
+								<td>foreach</td>
+								<td>mutable</td>
+								<td>Permet d'exécuter une fonction donnée sur chaque élément du tableau. Ne renvoie rien</td>
+							</tr>
+						</table>
+				</section>
+				<section>
+						<h1>Boucles</h1>
+						<pre>
+								<code class='javascript'>
+const ARRAY = [1,2,3,4];
+for(let i = 0, _l=ARRAY.length; i < _l; i++ ){console.log(ARRAY[i])}
+
+ARRAY.forEach(function(element, idx){console.log(element, idx)});
+
+ARRAY.map(function(element, idx){console.log(element, idx)});
+								</code>
+							</pre>
 				</section>
 				<section>
 					<h1>Scope</h1>
+					<p>Les éléments créé en javascript ont une portée. Un <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Types_et_grammaire#Les_port%C3%A9es_de_variables">Scope</a>.</p>
+					<p>Lorsqu'une variable est déclarée avec var en dehors des fonctions, elle est appelée variable globale car elle est disponible pour tout le code contenu dans le document. Lorsqu'une variable est déclarée dans une fonction, elle est appelée variable locale car elle n'est disponible qu'au sein de cette fonction.</p>
+					<p>Avant la norme ECMAScript2015 il n'existait pas d'autre manière de déclarer des variables. grâce au mot clé const et let, il est possible de restreindre la portée d'une variable au bloc en cours (un bloc if par exemple)</p>
+				</section>
+				<section>
+						<h1>Scope</h1>
+						<pre>
+							<code class="javascript">
+if (true) {
+	var x = 5;
+}
+console.log(x); // x vaut 5
+
+if (true) {
+	let y = 5;
+}
+console.log(y); // ReferenceError: y is not defined
+							</code>
+						</pre>
 				</section>
 				<section>
 					<h1>Closure</h1>
@@ -568,11 +619,24 @@ privilegedFx2(); // => affiche la dateAppel d'après !
 						</pre>
 						<blockquote>Les closures sont un bon moyen de rendre privée une partie du code. Elles seront très utiles pour créer des modules. Mais on y reviendra plus tard...</blockquote>
 				</section>
-				<section id="part-3-7">
+				<section>
 					<h1>Binding</h1>
 				</section>
+				<section>
+					<h1>Binding</h1>
+					<pre>
+						<code class="javascript">
+['add', 'remove'].forEach((action) => {
+  ['change', 'status', 'error'].forEach((elt) => {
+	  this[`${action}${capitalizeDefinition}${capitalize(elt)}Listener`] = (cb) => {
+      this[`${action}Listener`](`${def}:${elt}`, cb);
+    }
+  })
+});
+					</code>
+				</pre>
+				</section>
 			</section>
-
 			<section id="part-4">
 				<section id="part-4-1">
 					<h1>Prototypes et classes</h1>
@@ -705,16 +769,6 @@ fakeArray.reverse().join(' ');
 				</section>
 				<section>
 					<h2>Les boucles</h2>
-					<pre>
-						<code class='javascript'>
-const ARRAY = [1,2,3,4];
-for(let i = 0, _l=ARRAY.length; i < _l; i++ ){console.log(ARRAY[i])}
-
-ARRAY.forEach(function(element, idx){console.log(element, idx)});
-
-ARRAY.map(function(element, idx){console.log(element, idx)});
-						</code>
-					</pre>
 				</section>
 
 				<section>
