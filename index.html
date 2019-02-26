@@ -387,10 +387,72 @@ date.getMilliseconds() // "Milliseconds", un seul mot : une seule initiale.
 "true"&true => 0 // le & binaire renvoie le bit 0...
 "1" == true => true // bah oui après converstion "1" => 1 => true donc égale à true...
 					</code></pre>
+					<blockquote>Globalement les valeur suivant sont Falsy: <i>false, undefined, null, "", 0, NaN</i>. Le reste est Truthy.</blockquote>
 				</section>
+				<section>
+					<h1>Destructuring  / Spreading</h1>
+					<p>Des opérateurs de décomposition (<a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Op%C3%A9rateurs/Syntaxe_d%C3%A9composition">Spread</a>) et d'affectation par décomposition (<a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Op%C3%A9rateurs/Affecter_par_d%C3%A9composition">Destructuring</a>) ont fait leur apparition pour manipuler plus simplement les objets et les collections.</p>
+					<ul>
+						<li>La syntaxe de décomposition permet d'étendre un itérable en lieu et place de plusieurs arguments (pour les appels de fonctions) ou de plusieurs éléments (pour les tableaux) ou de paires clés-valeurs (pour les objets).</li>
+						<li>L'affectation par décomposition est une expression JavaScript qui permet d'extraire des données d'un tableau ou d'un objet grâce à une syntaxe dont la forme ressemble à la structure du tableau ou de l'objet.</li>
+					</ul>
+				</section>
+				<section>
+					<h1>
+							Destructuring / Spreading
+					</h1>
+					<pre>
+							<code class="javascript">
+/* Arrays */
+// Initialisation d'un array
+const array = [1, 2, 3];
+// On crée un nouvel array à partir de l'ancien
+const array2 = [...array, 4, 5]; // array2 => [1,2,3,4,5]
+function f(a, b, c) {
+		return a + b + c;
+}
+// On appelle la fonction à partir de l'array
+f(...array); // => 1+2+3
+// On récupère des éléments précis d'un array.
+const [a, b, c, ...rest] = array2; // a=1; b=2, c=3, rest=[4,5]
+							</code>
+							</pre>
+				</section>
+				<section>
+						<h1>
+								Destructuring / Spreading
+						</h1>
+						<pre>
+								<code class="javascript">
+/* Objets */
+// Initialisation d'un objet.
+const objet = {a: 1, b: 2};
+// On crée un nouvel objet à partir de l'ancien
+const objet2 = {...objet, c: 3}; // objet2 = {a:1, b:2, c:3}
+// On récupère des éléments précis d'un objet.
+const {a, b, ...rest} = objet2; // a=1 b=2 rest={c:3}
+// On peut aussi déstructurer directement dans une fonction :
+function g({a, b, c: c2}) {
+		return a + b + c2;
+}
+g(objet2);
+								</code>
+							</pre>
+					</section>
+				<section>
+					<h1>Interpolation de strings</h1>
+					<p>Les nouvelles normes ECMAScript ont permis de faire évoluer le langages et de fournir un moyen de manipuler les strings. Il est désormais possible de créer des chaine de caractères multiligne et paramétrables!</p>
+					<pre>
+							<code class="javascript">
 
-				<section><h1>Destructing / Spreading</h1></section>
-				<section><h1>Interpolation de strings</h1></section>
+const person = {nom: Ingargiola, prenom: Thibault};
+
+const stringAvant = 'Bonjour je suis ' + person.prenom + ' ' + person.nom;
+const stringApres= `Bonjour je suis ${objet.prenom} ${objet.nom}.
+Et le javascript c'était pas mieux avant!`;
+							</code>
+						</pre>
+				</section>
 			</section>
 
 			<section id="part3">
