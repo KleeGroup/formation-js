@@ -457,6 +457,9 @@ Et le javascript c'était pas mieux avant!`;
 			</section>
 			<section id="part3">
 				<section>
+					<h1>Programmation en JS</h1>
+				</section>
+				<section>
 					<h1>Les fonctions</h1>
 					<p>Les fonctions sont un peu la base de toute programmation... Le Javascript n'échappe pas à la règle.</p>
 					<p>En JavaScript, les fonctions sont des objets de première classe. Cela signifie qu'elles peuvent être manipulées et échangées, qu'elles peuvent avoir des propriétés et des méthodes, comme tous les autres objets JavaScript. Les fonctions sont des objets <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Fonctions">Function</a></p>
@@ -639,27 +642,150 @@ privilegedFx2(); // => affiche la dateAppel d'après !
 			</section>
 			<section id="part-4">
 				<section>
-					<h1>Prototypes et classes</h1>
+					<h1>Le JS objet</h1>
+					<blockquote>On l'avait dit au début, mais le javascript n'a pas de de classe à proprement parler. C'est un langage <i>prototypable</i>!</blockquote>
 				</section>
 				<section>
-					<h1>Prototype</h1>
-				</section>
+						<h1>Constructeur</h1>
+						<ul>
+								<li>Fonctions servant à initialiser un nouvel objet. Le nom du constructeur est un peu comme « le nom de la classe »…</li>
+								<li>Toute fonction peut servir de constructeur : il suffit de l’appeler avec l’opérateur new.</li>
+								<li>Elle dispose alors d’une variable implicite this, qui représente la nouvelle « instance ».</li>
+								<li>L’objet créé référence son constructeur : constructor.</li>
+						</ul>
+					</section>
+					<section>
+						<h1>Constructeur</h1>
+						<pre>
+							<code class='javascript'>
+function Person(first, last) {
+this.first = first;
+this.last = last;
+}
+
+var joeLopezPerson = new Person('Joe', 'Lopez');
+var davidLopezz = new Person('David', 'lopez');
+joeLopezPerson.first // => 'Joe'
+davidLopezz.first   // => 'David'
+
+// Si on jouait aux cons ?!
+function LopezPerson(first, last) {
+this.first = first;
+this.last = last;
+return { first: 'Anne', last: 'Pas Lopez' };
+}
+var oops = new LopezPerson('Henry', 'Lopez');
+oops.first // => Anne
+							</code>
+						</pre>
+			</section>
 				<section>
-					<h1>Constructeur</h1>
-				</section>
+						<h2>Prototypes</h2>
+						<ul>
+								<li>Tout constructeur a un prototype : un objet qui définit les propriétés (et donc méthodes) partagées par tous les objets que produit ce constructeur.</li>
+								<li>Le prototype est « vivant » : si on le triture après l’appel au constructeur, ça marche quand même !</li>
+								<li>Techniquement, y’a plein d’autres trucs dans un prototype (réf. au constructeur, gestion de propriétés…).</li>
+							<li>On verra, plutôt vous verrez...</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Prototype</h2>
+						<pre>
+							<code class='javascript'>
+function Person(first, last) {
+	this.first = first;
+	this.last = last;
+}
+
+// On augmente l'existant…
+Person.prototype.fullName = function fullName() {
+	return this.first + ' ' + this.last;
+}
+Person.prototype.greet = function greet() {
+	alert('Salut je m’appelle ' + this.first);
+}
+
+var john = new Person('John', 'Smith');
+john.fullName() // => 'John Smith'
+john.greet()    // 'Salut je m’appelle John'
+							</code>
+						</pre>
+					</section>
+					<section>
+						<h2>Prototype (Don't)</h2>
+						<pre>
+							<code class='javascript'>
+function Person(first, last) {
+	this.first = first;
+	this.last = last;
+	this.fullName = function fullName() {
+		return this.first + ' ' + this.last;
+	}
+	this.greet = function greet() {
+		alert('Salut je m’appelle ' + this.first);
+	}
+}
+var john = new Person('John', 'Smith');
+john.fullName() // => 'John Smith'
+john.greet()    // 'Salut je m’appelle John'
+							</code>
+						</pre>
+						<blockquote>Mauvaise pratique: on copie la fonction dans chaque constructeur</blockquote>
+					</section>
+				<section>
+						<pre>
+							<h2>"Déguiser" un objet en tableau</h2>
+							<code class='javascript'>
+/// Toi aussi, déguise-toi en tableau !
+
+var fakeArray = { 0: '!', 1: 'ça torche', 2: 'JavaScript', length: 3 };
+
+fakeArray.join = [].join; fakeArray.reverse = [].reverse;
+fakeArray.reverse().join(' ');
+/// => 'JavaScript ça torche !'
+
+// Ou alors :
+fakeArray.__proto__ = Array.prototype;
+fakeArray.reverse().join(' ');
+// => 'JavaScript ça torche !'
+
+// Méthodes « génériques » utilisables: hn
+// concat, join, pop, push, reverse, shift,
+// slice, sort, splice, toString, unshift.
+							</code>
+						</pre>
+					</section>
 				<section>
 					<h1>Classe</h1>
+					<p>Bon depuis ES2015 on a tout de même un équivalent de classe. Ce n'est que du sucre sytaxique, mais c'est quand même vachement bien!</p>
+					<pre>
+							<code class='javascript'>
+class TodoItem extends Component {
+	constructor(props, context) {
+		super(props, context);
+		this.state = {
+			editing: false
+		};
+	}
+
+	handleDoubleClick() {
+		this.setState({ editing: true });
+	}
+	…
+}
+							</code>
+						</pre>
 				</section>
 				<section>
 					<h1>La chaîne d'appel d'une méthode</h1>
-					<code>obj.prop</code> ou <code>obj['prop']</code> (c'est équivalent)
+					<p>Supposons que l'on fasse appelle à l'attribut d'un objet: <code>obj.prop</code></p>
 					<ol>
 						<li class="fragment visible" data-fragment-index="0">On part de l’objet indexé (obj)</li>
 						<li class="fragment visible" data-fragment-index="1">Si on trouve prop dans ses own properties, on s’arrête là</li>
 						<li class="fragment visible" data-fragment-index="2">Sinon, on passe sur le prototype du niveau supérieur : celui du constructeur de l’objet en cours*</li>
 						<li class="fragment visible" data-fragment-index="3">On reprend à l’étape 2, sauf si on était déjà sur Object.prototype, auquel cas le lookup est fini, et échoue (undefined).</li>
 					</ol>
-					<blockquote>*conceptuellement, <code>constructor.prototype</code> ou <code>__proto__</code></blockquote>
+					<blockquote class="fragment visible" data-fragment-index="2">*on le trouve sous: <code>constructor.prototype</code> ou <code>__proto__</code></blockquote>
 				</section>
 				<section>
 						<h2>La preuve en live...</h2>
@@ -777,29 +903,7 @@ for (var k of arr){ console.log(k)}; // => hello, world, undefined, cool
 						</code>
 					</pre>
 				</section>
-				<section>
-					<pre>
-						<h2>"Déguiser" un objet en tableau<h2>
-						<code class='javascript'>
-// Toi aussi, déguise-toi en tableau !
 
-var fakeArray = { 0: '!', 1: 'ça torche', 2: 'JavaScript', length: 3 };
-
-fakeArray.join = [].join; fakeArray.reverse = [].reverse;
-fakeArray.reverse().join(' ');
-// => 'JavaScript ça torche !'
-
-// Ou alors :
-fakeArray.__proto__ = Array.prototype;
-fakeArray.reverse().join(' ');
-// => 'JavaScript ça torche !'
-
-// Méthodes « génériques » utilisables: hn
-// concat, join, pop, push, reverse, shift,
-// slice, sort, splice, toString, unshift.
-						</code>
-					</pre>
-				</section>
 				<section>
 					<h2>Les boucles</h2>
 				</section>
@@ -948,112 +1052,8 @@ const monElement = document.querySelector('[data-my-selector]');
 					</ul>
 				</section>
 				<section>
-					<h2>Constructeur</h2>
-					<ul>
-					    <li>Fonctions servant à initialiser un nouvel objet. Le nom du constructeur est un peu comme « le nom de la classe »…</li>
-					    <li>Toute fonction peut servir de constructeur : il suffit de l’appeler avec l’opérateur new.</li>
-					    <li>Elle dispose alors d’une variable implicite this, qui représente la nouvelle « instance ».</li>
-					    <li>L’objet créé référence son constructeur : constructor.</li>
-					</ul>
-				</section>
-				<section>
-					<h2>Constructeur</h2>
-					<pre>
-						<code class='javascript'>
-function Person(first, last) {
-  this.first = first;
-  this.last = last;
-}
-
-var joeLopezPerson = new Person('Joe', 'Lopez');
-var davidLopezz = new Person('David', 'lopez');
-joeLopezPerson.first // => 'Joe'
-davidLopezz.first   // => 'David'
-
-// Si on jouait aux cons ?!
-function LopezPerson(first, last) {
-  this.first = first;
-  this.last = last;
-  return { first: 'Anne', last: 'Pas Lopez' };
-}
-var oops = new LopezPerson('Henry', 'Lopez');
-oops.first // => Anne
-						</code>
-					</pre>
-				</section>
-
-				<section>
-					<h2>Prototypes</h2>
-					<ul>
-					    <li>Tout constructeur a un prototype : un objet qui définit les propriétés (et donc méthodes) partagées par tous les objets que produit ce constructeur.</li>
-					    <li>Le prototype est « vivant » : si on le triture après l’appel au constructeur, ça marche quand même !</li>
-					    <li>Techniquement, y’a plein d’autres trucs dans un prototype (réf. au constructeur, gestion de propriétés…).</li>
-						<li>On verra, plutôt vous verrez...</li>
-					</ul>
-				</section>
-				<section>
-					<h2>Prototype</h2>
-					<pre>
-						<code class='javascript'>
-function Person(first, last) {
-  this.first = first;
-  this.last = last;
-}
-
-// On augmente l'existant…
-Person.prototype.fullName = function fullName() {
-  return this.first + ' ' + this.last;
-}
-Person.prototype.greet = function greet() {
-  alert('Salut je m’appelle ' + this.first);
-}
-
-var john = new Person('John', 'Smith');
-john.fullName() // => 'John Smith'
-john.greet()    // 'Salut je m’appelle John'
-						</code>
-					</pre>
-				</section>
-				<section>
-					<h2>Prototype (Don't)</h2>
-					<pre>
-						<code class='javascript'>
-function Person(first, last) {
-  this.first = first;
-  this.last = last;
-  this.fullName = function fullName() {
-    return this.first + ' ' + this.last;
-  }
-  this.greet = function greet() {
-    alert('Salut je m’appelle ' + this.first);
-  }
-}
-var john = new Person('John', 'Smith');
-john.fullName() // => 'John Smith'
-john.greet()    // 'Salut je m’appelle John'
-						</code>
-					</pre>
-					<blockquote>Mauvaise pratique: on copie la fonction dans chaque constructeur</blockquote>
-				</section>
-				<section>
 					<h2>Les classes ES6</h2>
-					<pre>
-						<code class='javascript'>
-class TodoItem extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      editing: false
-    };
-  }
 
-  handleDoubleClick() {
-    this.setState({ editing: true });
-  }
-  …
-}
-						</code>
-					</pre>
 					<blockquote class='fragment'>Attention il s'agit de sucre syntaxique pas d'une classe comme en Java ou .NET. Le JS reste un langage prototypale.</blockquote>
 				</section>
 				<section>
