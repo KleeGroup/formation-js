@@ -638,20 +638,53 @@ privilegedFx2(); // => affiche la dateAppel d'après !
 				</section>
 			</section>
 			<section id="part-4">
-				<section id="part-4-1">
+				<section>
 					<h1>Prototypes et classes</h1>
 				</section>
-				<section id="part-4-2">
+				<section>
 					<h1>Prototype</h1>
 				</section>
-				<section id="part-4-3">
+				<section>
 					<h1>Constructeur</h1>
 				</section>
-				<section id="part-4-4">
+				<section>
 					<h1>Classe</h1>
 				</section>
-				<section id="part-4-5">
-					<h1>Chaine d'appel</h1>
+				<section>
+					<h1>La chaîne d'appel d'une méthode</h1>
+					<code>obj.prop</code> ou <code>obj['prop']</code> (c'est équivalent)
+					<ol>
+						<li class="fragment visible" data-fragment-index="0">On part de l’objet indexé (obj)</li>
+						<li class="fragment visible" data-fragment-index="1">Si on trouve prop dans ses own properties, on s’arrête là</li>
+						<li class="fragment visible" data-fragment-index="2">Sinon, on passe sur le prototype du niveau supérieur : celui du constructeur de l’objet en cours*</li>
+						<li class="fragment visible" data-fragment-index="3">On reprend à l’étape 2, sauf si on était déjà sur Object.prototype, auquel cas le lookup est fini, et échoue (undefined).</li>
+					</ol>
+					<blockquote>*conceptuellement, <code>constructor.prototype</code> ou <code>__proto__</code></blockquote>
+				</section>
+				<section>
+						<h2>La preuve en live...</h2>
+						<pre>
+							<code class="javascript hljs ">
+function Person(first, last) {
+	this.first = first;
+	this.last = last;
+}
+Person.prototype.fullName = function fullName() {
+	return this.first + ' ' + this.last;
+};
+const davidLopez = new Person('David', 'Lopez');
+
+davidLopez.first      // => 'David',         own property
+davidLopez.fullName() // => 'David Lopez', Person.prototype
+davidLopez.toString() // => '[object Object]', Object.prototype
+
+Person.prototype.toString = function personToString() {
+	return '#Person ' + this.fullName();
+};
+
+davidLopez.toString() // => "#Person David Lopez"
+							</code>
+						</pre>
 				</section>
 			</section>
 
