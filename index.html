@@ -937,7 +937,6 @@ davidLopez.toString() // => "#Person David Lopez"
 						</pre>
 				</section>
 			</section>
-
 			<section id="part-5">
 				<section>
 					<h1>Structure applicative</h1>
@@ -991,22 +990,108 @@ lala.age; // 47
 	renommage.age; // 8
 						</code></pre>
 					</section>
-			</section>
+					<section>
+						<h1>Module depuis ES6</h1>
+						<p>Il existe différente manière d'exporter et d'importer des choses via module. Le mieux est d'aller voir la <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/import">doc</a> ;)</p>
+						<pre><code class="javascript">
+	/// fichier1.js
+	export default  {
+		name: "lala",
+		age: 42
+	}
 
+	export const lolo = 28
+
+	/// fichier2.js
+	import lala from "./fichier1.js";
+	import * as monModule from './fichier1.js';
+
+	lala.age; // 42
+	monModule.lolo; // 28
+						</code></pre>
+					</section>
+			</section>
 			<section id="part-6">
 				<section>
 					<h1>Gestion de l'asynchrone</h1>
+					<p>Dans une application JS vous aurez à gérer de l'asynchrone. Ne serait-ce que pour faire des appels à une API. Il existe plusieurs manière de gérer cela.</p>
 				</section>
 				<section>
 					<h1>Callbacks</h1>
+					<pre><code class="javascript">
+function delayedAlert() {
+	window.setTimeout(slowAlert, 2000);
+}
+
+function slowAlert() {
+	alert("That was really slow!");
+}
+					</code></pre>
+					<blockquote>Attention le code de la callback est exécuté dans un contexte complètement différent!</blockquote>
 				</section>
 				<section>
 					<h1>Promesses</h1>
+					<p>L'objet <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Promise">Promise</a> est utilisé pour réaliser des traitements de façon asynchrone. Une promesse représente une valeur qui peut être disponible maintenant, dans le futur voire jamais.</p>
+					<p>Une promesse a un état (pending, fullfilled, rejected). En fonction de sa résolution elle appelera la callback associée via l'instruction then, qui renverra elle aussi une promesse.</p>
+					<pre><code class="javascript">promise.then(successCb,errorCb).then(otherSuccess, otherCb).catch(errorHandlingFn)</code></pre>
 				</section>
+
+				<section>
+						<h1>Promesses</h1>
+					<pre><code class="javascript">
+var promise1 = new Promise(function(resolve, reject) {
+	setTimeout(function() {
+		resolve('foo');
+	}, 300);
+});
+
+promise1.then(function(value) {
+	console.log(value);
+	// expected output: "foo"
+});
+					</code></pre>
+				</section>
+
+				<section>
+						<h1>Promesses</h1>
+
+						<pre><code class="javascript">
+fetch('/users.json')
+.then(function(response) {
+	return response.json()
+}).then(function(json) {
+	console.log('parsed json', json)
+}).catch(function(ex) {
+	console.log('parsing failed', ex)
+})
+						</code></pre>
+					</section>
 				<section>
 					<h1>Async/await</h1>
+					<p>La déclaration <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/async_function">async</a> function définit une fonction asynchrone qui renvoie un objet AsyncFunction.</p>
+					<p>Une fonction asynchrone est une fonction qui s'exécute de façon asynchrone grâce à la boucle d'évènement en utilisant une promesse (Promise) comme valeur de retour.</p>
+					<p>L'opérateur <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Op%C3%A9rateurs/await">await</a> permet d'attendre la résolution d'une promesse. Il ne peut être utilisé qu'au sein d'une fonction asynchrone.</p>
+					<blockquote>Au final c'est un sucre syntaxique autour d'une promesses</blockquote>
 				</section>
+			<section>
+				<h1>Async/await</h1>
+				<pre><code class="javascript">
+function resolveAfter2Seconds(x) {
+	return new Promise(resolve => {
+		setTimeout(() => {
+			resolve(x);
+		}, 2000);
+	});
+}
+
+async function f1() {
+	var x = await resolveAfter2Seconds(10);
+	console.log(x); // 10
+}
+f1();
+				</pre></code>
 			</section>
+		</section>
 
 			<section id="part-7">
 				<section>
@@ -1032,491 +1117,6 @@ lala.age; // 47
 				</section>
 				<section>
 					<h1>npm</h1>
-				</section>
-			</section>
-
-			<section>
-				<section data-background='https://media.giphy.com/media/vKZKZ0I9nCAGA/giphy.gif'><h1>Les types de base</h1></section>
-				<section>
-					<h2>in et delete</h2>
-					<pre>
-						<code class='javascript'>
-
-let person = { name: 'Joe', langs: ['fr', 'en'] };
-
-'name' in person        // => true
-person.age = 35;
-'age' in person         // => true
-person.age = null;
-'age' in person         // => true
-delete person.age
-'age' in person         // => false
-person.age              // => undefined
-
-0 in person.langs       // => true
-'0' in person.langs     // => true
-person.langs[3] = 'de';
-2 in person.langs       // => false
-3 in person.langs       // => true
-delete person.langs[3]
-person.langs            // => ['fr', 'en', undefined, undefined]
-						</code>
-					</pre>
-				</section>
-				<section>
-					<h2>Falsy / Truthy</h2>
-				</section>
-				<section>
-					<h2>XML</h2>
-					<pre>
-					<code class='xml'>
-<menu id="file" value="File">
-  <popup>
-    <menuitem value="New" onclick="CreateNewDoc()"></menuitem>
-    <menuitem value="Open" onclick="OpenDoc()" ></menuitem>
-    <menuitem value="Close" onclick="CloseDoc()" ></menuitem>
-  </popup>
-</menu>
-					</code>
-				</pre>
-
-				</section>
-				<section>
-					<h2>JSON</h2>
-					<pre>
-					<code class='javascript'>
-{
-    "menu": {
-        "id": "file",
-        "value": "File",
-        "popup": {
-            "menuitem": [
-                { "value": "New", "onclick": "CreateNewDoc()" },
-                { "value": "Open", "onclick": "OpenDoc()" },
-                { "value": "Close", "onclick": "CloseDoc()" }
-            ]
-        }
-    }
-}
-					</code>
-				</pre>
-
-				</section>
-
-
-				<section>
-					<h2>Oublions jQuery</h2>
-					<pre>
-					<code class='javascript'>
-//Avant
-const monElement = $('[data-my-selector]');
-
-//Après
-const monElement = document.querySelector('[data-my-selector]');
-					</code>
-				</pre>
-
-				</section>
-			</section>
-			<section data-state="theme-color-blue-yellow">
-				<section data-background=''>
-					<h1>Les outils</h1>
-				</section>
-				<section data-background='https://nodejs.org/static/images/logos/nodejs-green.png'>
-				</section>
-				<section>
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>Node.js</h2>
-					<ul>
-						<li>JS côté serveur</li>
-						<li>Apporte plein d'outils sous forme de modules</li>
-						<li><a href='npmjs.com'>npm</a> (node package module)</li>
-					</ul>
-				</section>
-				<section >
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>Node.js</h2>
-					<ul>
-						<li>package.json</li>
-						<li>node_modules</li>
-						<li><code>npm install -g ma-dependance-globale</code></li>
-						<li><code>npm install -g rimraf</code></li>
-						<li><code>npm install --save ma-dependance</code></li>
-					</ul>
-				</section>
-				<section data-background='http://www.kolhamevaser.com/wp-content/uploads/2015/05/Schechter.Bavel_.TowerofBavel.jpg'>
-					<h1>Babel</h1>
-				</section>
-				<section data-background='http://jlongster.com/s/upload/webpack-hot1.png'>
-			    		<h1 style='background-color:rgba(1,1,1, 0.5);'><a href='https://webpack.github.io/'>Webpack</a></h1>
-				</section>
-
-				<section data-background=''>
-					<h1>Debug</h1>
-				</section>
-			</section>
-			<section data-state="theme-color-blue-yellow">
-				<section data-background='https://media.giphy.com/media/RHUGfUYnjNuMw/giphy.gif'>
-					<h1>Prototypes / Constructor</h1>
-				</section>
-				<section>
-					<h2>Classes ?</h2>
-					<ul>
-						<li>Avant ES6 pas de classe</li>
-						<li>JS est un langage prototypale</li>
-						<li>En JS tout est un objet</li>
-						<li>Une propriété est identifiée par une paire nom / valeur</li>
-						<li>Une propriété peut être une fonction</li>
-					</ul>
-				</section>
-				<section>
-					<h2>Les classes ES6</h2>
-
-					<blockquote class='fragment'>Attention il s'agit de sucre syntaxique pas d'une classe comme en Java ou .NET. Le JS reste un langage prototypale.</blockquote>
-				</section>
-				<section>
-					<h2>La chaîne d'appel d'une méthode</h2>
-					<code>obj.prop</code> ou <code>obj['prop']</code> (c'est équivalent)
-					<ol>
-						<li class='fragment'>On part de l’objet indexé (obj)</li>
-						<li class='fragment'>Si on trouve prop dans ses own properties, on s’arrête là</li>
-						<li class='fragment'>Sinon, on passe sur le prototype du niveau supérieur : celui du constructeur de l’objet en cours*</li>
-						<li class='fragment'>On reprend à l’étape 2, sauf si on était déjà sur Object.prototype, auquel cas le lookup est fini, et échoue (undefined).</li>
-					</ol>
-					<footer>*conceptuellement, <code>constructor.prototype</code> ou <code>__proto__</code></footer>
-				</section>
-				<section data-background=''>
-					<h2>La preuve en live...</h2>
-					<pre>
-						<code class='javascript'>
-function Person(first, last) {
-  this.first = first;
-  this.last = last;
-}
-Person.prototype.fullName = function fullName() {
-  return this.first + ' ' + this.last;
-};
-const davidLopez = new Person('David', 'Lopez');
-
-davidLopez.first      // => 'David',         own property
-davidLopez.fullName() // => 'David Lopez', Person.prototype
-davidLopez.toString() // => '[object Object]', Object.prototype
-
-Person.prototype.toString = function personToString() {
-  return '#Person ' + this.fullName();
-};
-
-davidLopez.toString() // => "#Person David Lopez"
-						</code>
-					</pre>
-				</section>
-			</section>
-			<section>
-				<section data-background=''><h1>Closure</h1></section>
-				<section >
-					<h2>Closure simple</h2>
-
-				</section>
-				<section>
-					<h2>Les modules sont une utilisation des closures</h2>
-					<pre><code class="javascript">
-function yourModule(require, module, exports) {
-
-  let widgets = {};
-  let util = require('util');
-  let Widget = require('widgets/base');
-
-  function CoolWidget(elt) { … }
-  util.inherits(CoolWidget, Widget);
-  // …
-
-  module.exports = Widget;
-}
-					</code></pre>
-					<blockquote>Dans node on ne voit pas la fonction enrobante...</blockquote>
-				</section>
-				<section data-background='http://995642590.r.lightningbase-cdn.com/wp-content/uploads/2013/05/HR-Double-Bind-article-by-John-Sumser-on-HR-Examiner-425x282px.jpg'>
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>Le binding</h2>
-
-				</section>
-				<section data-background='http://995642590.r.lightningbase-cdn.com/wp-content/uploads/2013/05/HR-Double-Bind-article-by-John-Sumser-on-HR-Examiner-425x282px.jpg'>
-					<h2>Le problème</h2>
-					<pre>
-						<code class='javascript'>
-var name = 'Mr X';
-let obj = {
-  name: 'Joe Lopez',
-  greet: function greet(whom) {
-	console.log(this)
-    console.log(this.name + ' salue ' + whom);
-  },
-  greetAll: function greetAll(first, second, last) {
-	console.log(this)
-    [first, second, last].forEach(this.greet);
-  }
-};
-obj.greet("les lopezs de France");
-// => 'Joe Lopez salut les lopezs de France !'
-let fx = obj.greet;
-fx("l’atelier") // => '"Mr X salue l’atelier"'
-obj.greetAll('David', 'Joe', 'Guénolé'); // => 'Mr X salue David, Mr X salue Joe, Mr X salue undefined'
-						</code>
-					</pre>
-				</section>
-				<section data-background='http://995642590.r.lightningbase-cdn.com/wp-content/uploads/2013/05/HR-Double-Bind-article-by-John-Sumser-on-HR-Examiner-425x282px.jpg'>
-					<h2>Comment faire ? La closure?</h2>
-					<pre>
-						<code class='javascript'>
-const obj = {
-  // …
-  greetAll: function greetAll(first, second, last) {
-    var that = this;
-    [first, second, last].forEach(function(name) {
-      that.greet(name);
-    });
-  }
-}
-						</code>
-					</pre>
-				</section>
-				<section data-background=''>
-					<h2>Comment faire ? ES6 style?</h2>
-					<pre>
-						<code class='javascript'>
-const obj = {
-  // …
-  greetAll(first, second, last) {
-    [first, second, last].forEach(name => this.greet(name));
-	//Ultra fat
-  }
-}
-						</code>
-					</pre>
-				</section>
-				<section>
-					<h2>call et apply</h2>
-					<pre>
-						<code class='javascript'>
-
-
-//let fx = obj.greet;
-fx.call(obj, 'les singes') // Joe Lopez salue les singes
-
-
-let xy = { 0: 'Zero', 1: 'One', length: 2 };
-Array.prototype.join.call(xy, '-') // 'Zero-One'
-
-
-fx.apply(obj, ['']) // => 'Joe salue l’atelier'
-Array.prototype.push.apply(xy, ['Two', 'Three', 'Four']) // => 5
-xy // => { 0: 'Zero', 1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', length: 5 }
-</code>
-</pre>
-
-				</section>
-			</section>
-			<section >
-				<section data-background='http://104.236.204.173/wp-content/uploads/2015/05/async.jpg'>
-					<h1 style='background-color:rgba(1,1,1, 0.5);'>JS et asynchronisme</h1>
-				</section>
-				<section>
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>Callback</h2>
-					<pre>
-						<code>
-function delayedAlert() {
-  window.setTimeout(slowAlert, 2000);
-}
-
-function slowAlert() {
-  alert("That was really slow!");
-}
-					</code></pre>
-				</section>
-				<section>
-					<h2>Les promesses</h2>
-					<p>
-						Une promesse a un état (pending, fullfilled, rejected).<br>
-						Elle est asynchrone, et se termine soit par un succès soit par une erreur et renvoie une nouvelle promesse.
-					</p>
-					<code class='javascript'>promise.then(successCb,errorCb).then(otherSuccess, otherCb).catch(errorHandlingFn)</code>
-
-				</section>
-				<section>
-					<h2>Les promesses</h2>
-					<pre><code class='javascript'>
-const myPromise = new Promise((resolve, reject) => {
-	ajaxCall({success: resolve, error: reject});
-})
-
-Promise.resolve([1,2,3,4]);
-
-Promise.reject('ma super erreur')
-
-					</code></pre>
-
-				</section>
-				<section>
-					<H2 style='background-color:rgba(1,1,1, 0.5);'>Les promesses</H2>
-					<pre class='javascript'><code>
-fetch('/users.json')
-  .then(function(response) {
-    return response.json()
-  }).then(function(json) {
-    console.log('parsed json', json)
-  }).catch(function(ex) {
-    console.log('parsing failed', ex)
-  })					</code></pre>
-				</section>
-			</section>
-			<section >
-				<section data-background=''>
-					<h1>ES6 / 2015</h1>
-				</section>
-				<section>
-					<h2>Les modules de node</h2>
-					<pre>
-						<code class='javascript'>
-//Dans un fichier
-module.exports = monObjetAExporter;
-
-//Utilisation
-require('./mon_module_locale');
-//Utilisation d'un module npm
-require('mon_module');
-</code>
-
-
-					</pre>
-				</section>
-				<section>
-					<h2>Les modules de Papa</h2>
-					<pre>
-						<code class='javascript'>
-import * as types from '../constants/ActionTypes';
-
-export function addTodo(text) {
-  return { type: types.ADD_TODO, text };
-}
-import React, { PropTypes, Component } from 'react';
-import classnames from 'classnames';
-import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from '../constants/TodoFilters';
-import 'http://material.js'
-…
-export default Footer;
-export const ADD_TODO = 'ADD_TODO';
-export const DELETE_TODO = 'DELETE_TODO';
-export const EDIT_TODO = 'EDIT_TODO';
-
-</code>
-
-
-					</pre>
-				</section>
-
-				<section>
-					<h2>Destruct</h2>
-					<pre>
-						<code class='javascript'>
-const { activeCount } = this.props;
-…
-const { filter: selectedFilter, onShow } = this.props;
-const [, filters] = output.props.children;
-…
-const [,, clear] = output.props.children;
-var { op: a, lhs: { op: b }, rhs: c } = getASTNode();
-Détails
-</code>
-
-
-					</pre>
-				</section>
-				<section>
-					<h2>Les strings interpolation et multi lignes</h2>
-					<pre>
-						<code class='javascript'>
-const person = { first: 'Thomas', last: 'Anderson', age: 25, nickname: 'Neo' };
-
-// Interpolation de JS quelconque
-console.log(`${person.first} aka ${person.nickname}`)
-// => 'Thomas aka Neo'
-
-// Multi-ligne !
-const markup = `<li>
-${person.first} ${person.last}, age ${person.age}
-</li>`;
-
-					</code>
-
-
-					</pre>
-				</section>
-				<section>
-					<h2>Valeur par défaut dans une fonction</h2>
-					<pre>
-						<code class='javascript'>
-function add(source, numToAdd = 1){
-	return source + numToAdd;
-}
-						</code>
-
-
-					</pre>
-				</section>
-				<section>
-					<h2>Les objets</h2>
-					<pre>
-						<code class='javascript'>
-function editTodo(id, text) {
-  return { type: types.EDIT_TODO, id, text };
-  //On créé un objet avec pour clef le nom de la variable.
-}
-const FILTERS = {
-  [maVar1]: 'All',
-  [maVar2]: 'Active',
-  [maVar3]: 'Completed'
-};
-						</code>
-
-
-					</pre>
-				</section>
-			</section>
-			<section >
-				<section data-background=''>
-					<h1 style='background-color:rgba(1,1,1, 0.5);'>LODASH / UNDERSCORE</h1>
-
-				</section>
-				<section>
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>on ne réinvente pas la roue</h2>
-				</section>
-				<section>
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>Les trucs utiles</h2>
-					<ul>
-						<li>Est ce que ma variable est un nombre / function / tableau <code>lodash/lang</code></li>
-						<li>Filtrer, trier, reduce.... <code>lodash/{collection/object/array}</code></li>
-						<li>Plein de fonctions prêtes à l'emploi <code>lodash/function</code></li>
-					</ul>
-				</section>
-			</section>
-			<section >
-				<section data-background='http://cdn.londonandpartners.com/visit/london-organisations/big-ben/63602-640x360-bigben_tilt_640.jpg'>
-					<h1 style='background-color:rgba(1,1,1, 0.5);'><a href='http://momentjs.com'>MOMENT</a></h1>
-				</section>
-				<section>
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>on ne réinvente pas la roue</h2>
-		        	<iframe webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="http://momentjs.com/" src="http://momentjs.com/" height='50%'  width='80%'></iframe>
-				</section>
-				<section>
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>Les trucs utiles</h2>
-					<ul>
-						<li>formatter des dates <code>moment().format('L')</code></li>
-						<li>Manipuler des dates <code>moment(maDate).add('days', 1)</code></li>
-						<li>Timezone...</li>
-					</ul>
-					<blockquote>Si tu manipules des dates tu utilises momentjs</blockquote>
-				</section>
-			</section>
-			<section >
-				<section>
-					<h1 style='background-color:rgba(1,1,1, 0.5);'><a href='https://github.com/get-focus/formation-js/tree/master/exercices'>Exercices</a></h1>
 				</section>
 			</section>
 		</div>
