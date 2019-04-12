@@ -40,6 +40,12 @@
 	.reveal {
 	font-size: 30px;
 	}
+	.multicol {
+		display: flex;
+	}
+	.col {
+		flex:1;
+	}
 	</style>
 </head>
 
@@ -103,7 +109,6 @@
 						</ul>
 				</section>
 			</section>
-
 			<section id="part-2">
 				<section >
 					<h1>Les bases</h1>
@@ -935,14 +940,57 @@ davidLopez.toString() // => "#Person David Lopez"
 
 			<section id="part-5">
 				<section>
-					<h1>Structure d'une application</h1>
+					<h1>Structure applicative</h1>
+					<p>Une application SPA est composée de plusieurs fichiers javascripts. C'est quand même plus pratique pour coder!</p>
+					<p>On découpe donc une application en modules</p>
+					<div class="multicol">
+						<div class="col"><img src="./images/structure-application.PNG"/></div>
+						<div class="col"><img src="./images/structure-application-2.PNG"/></div>
+					</div>
 				</section>
 				<section>
-					<h1>Déclarer un module</h1>
+					<h1>Module avant ES6</h1>
+					<p>Les modules javascripts permettent d'isoler votre code du reste de l'application, d'organiser votre code, d'éviter les collision de noms etc.</p>
+					<pre><code class="javascript">
+/// fichier1.js
+const private = 5;
+const monObjet = {
+	name: "lala",
+	age: 42 + private,
+
+}
+
+module.exports = monObjet;
+
+/// fichier2.js
+const lala = require('./fichier1.js');
+lala.awesomeness; // true;
+private; // undefined
+lala.age; // 47
+					</code></pre>
 				</section>
 				<section>
-					<h1>Utiliser un module</h1>
-				</section>
+						<h1>Module depuis ES6</h1>
+						<p>Il est possible d'exporter plusieurs variables au sein d'un même fichier en les nommant.</p>
+						<pre><code class="javascript">
+	/// fichier1.js
+	export monObjet = {
+		name: "lala",
+		age: 42
+	}
+
+	export monObjet2 = {
+			name: "lola",
+			age: 8
+	}
+
+	/// fichier2.js
+	import {monObjet, monObjet2 as renommage} from "./fichier1.js";
+
+	monObjet.age; // 42
+	renommage.age; // 8
+						</code></pre>
+					</section>
 			</section>
 
 			<section id="part-6">
