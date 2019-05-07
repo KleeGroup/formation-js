@@ -122,7 +122,7 @@
 						<li><b>boolean</b>: résultat d'une assertion logique <i>true</i> ou <i>false</i></li>
 						<li><b>null</b>: ne possède qu'une unique valeur <i>null</i></li>
 						<li><b>undefined</b>: représente la non-affectation d'une variable</li>
-						<li><b>number</b>: contient l'ensemble des valeur numéraire (entier, float, NaN, +Infinity, - Infinity)</li>
+						<li><b>number</b>: contient l'ensemble des valeurs numéraires (entier, float, NaN, +Infinity, - Infinity)</li>
 						<li><b>string</b>: représente une chaine de caractère à partir d'un ensemble d'élements 16bits non-signés</li>
 						<li><b>symbol</b>: type de données unique et inchangeable (souvent utilisé pour créer des identifiants)</li>
 					</ul>
@@ -132,7 +132,7 @@
 				<section>
 						<h1>Objets</h1>
 						<p>JavaScript est conçu autour d'un paradigme simple, basé sur les <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Utiliser_les_objets">objets</a>.</p>
-						<p>Un objet est un ensemble de propriétés et une propriété est une association entre un nom (aussi appelé clé) et une valeur.</p>
+						<p>Un objet est un ensemble de propriétés. Une propriété est une association entre un nom (aussi appelé clé) et une valeur.</p>
 						<p>La valeur d'une propriété peut être une fonction, auquel cas la propriété peut être appelée « méthode ».</p>
 				</section>
 				<section>
@@ -162,7 +162,7 @@ obj.a12; // => 'Gino' évidemment ;)
 					<h1>Strings</h1>
 					<p>Le type <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Formatage_du_texte">String</a> de JavaScript est utilisé pour représenter des données textuelles.</p>
 					<p>C'est un ensemble d'"éléments" de valeurs non signées sur 16 bits (unités de codage UTF-16).</p>
-					<p>Chaque élément dans la chaîne de caractères occupe une position dans la chaîne de caractères. Le premier élément se trouve à l'indice 0, le suivant à l'indice 1 et ainsi de suite.</p>
+					<p>Chaque élément occupe une position dans la chaîne de caractères. Le premier élément se trouve à l'indice 0, le suivant à l'indice 1 et ainsi de suite.</p>
 					<p>La longueur d'une chaîne de caractères est le nombre d'éléments qu'elle contient.</p>
 					<p>Une String est <b>immuable</b> il est impossible de la modifier une fois créée. Il est cependant possible de recréer une string à partir d'une autre string.</p>
 				</section>
@@ -180,7 +180,7 @@ maString[0] // => 'H'
 'déjà'.localeCompare('demain') // => -1 'déjà' est alphabétiquement avant 'demain'
 'déjà !'.toLocaleUpperCase()      // => 'DÉJÀ !' Renvoie une nouvelle instance en majuscule
 'ÇA POUTRE'.toLocaleLowerCase()   // => 'ça poutre' Renvoie une nouvelle instance en minuscule
-'one,two,three'.split(',')        // => ['one', 'two', 'three'] trnsformation en tableau selon un séparateur
+'one,two,three'.split(',')        // => ['one', 'two', 'three'] transformation en tableau selon un séparateur
 'one,,two,three'.split(/\W+/)     // => ['one', 'two'] transformation en tableau selon une expression régulière
 'hello'.substring(1)      // => 'ello' renvoie une nouvelle instance d'une partie de la chaine
 'hello'.slice(1, -2)      // => 'el' -> [1;length-2[
@@ -209,7 +209,7 @@ names.length
 // => 13
 
 names[9]
-// => undefined (comme 10 et 11): c'est appelé "sparse array"
+// => undefined (comme de 3 à 11): c'est appelé "sparse array"
 								</code>
 							</pre>
 				</section>
@@ -246,8 +246,8 @@ data.slice(-2, -1) // => [2]
 					<p>JavaScript ne possède pas de type primitif pour représenter des dates. Cependant l'objet Date et ses méthodes permettent de manipuler des dates et des heures au sein d'une application.</p>
 					<p>L'objet <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Nombres_et_dates#L'objet_Date">Date</a> possède de nombreuses méthodes pour définir, modifier, obtenir des dates. Il ne possède pas de propriétés</p>
 					<p>JavaScript gère les dates de façon similaire à Java. (Donc assez mal...)</p>
-					<p>Les dates sont représentées selon les nombres de millisecondes écoulées depuis le premier janvier 1970 à 00h00:00.
-							L'objet Date permet de représenter des dates allant de -100 000 000 jours jusqu'à +100 000 000 jours par rapport au premier janvier 1970 UTC.</p>
+					<p>Les dates sont représentées selon les nombres de millisecondes écoulées depuis le 1er janvier 1970 à 00h00:00.
+							L'objet Date permet de représenter des dates allant de -100 000 000 jours jusqu'à +100 000 000 jours par rapport au 1er janvier 1970 UTC.</p>
 				</section>
 				<section>
 						<h1>Dates</h1>
@@ -280,7 +280,7 @@ date.getMilliseconds() // "Milliseconds", un seul mot : une seule initiale.
 							</tr>
 							<tr>
 								<td>!=</td>
-								<td>true si les opérandes sont différents.</td>
+								<td>true si les opérandes sont différents après conversion en valeurs de mêmes types.</td>
 							</tr>
 							<tr>
 								<td>===</td>
@@ -394,7 +394,7 @@ date.getMilliseconds() // "Milliseconds", un seul mot : une seule initiale.
 "true"&true => 0 // le & binaire renvoie le bit 0...
 "1" == true => true // bah oui après converstion "1" => 1 => true donc égale à true...
 					</code></pre>
-					<blockquote>Globalement les valeurs suivantes sont Falsy: <i>false, undefined, null, "", 0, NaN</i>. Le reste est Truthy.</blockquote>
+					<blockquote>Globalement les valeurs suivantes sont Falsy : <ul><li>false</li><li>undefined</li><li>null</li><li>""</li><li>0</li><li>NaN</li></ul>. Le reste est Truthy.</blockquote>
 				</section>
 				<section>
 					<h1>Destructuring  / Spreading</h1>
@@ -448,10 +448,10 @@ g(objet2);
 					</section>
 				<section>
 					<h1>Interpolation de strings</h1>
-					<p>Les nouvelles normes ECMAScript ont permis de faire évoluer le langage et de fournir un moyen de manipuler les strings. Il est désormais possible de créer des chaine de caractères multiligne et paramétrables!</p>
+					<p>Les nouvelles normes ECMAScript ont permis de faire évoluer le langage et de fournir un moyen de manipuler les strings. Il est désormais possible de créer des chaines de caractères multiligne et paramétrables!</p>
 					<pre>
 							<code class="javascript">
-const person = {nom: Ingargiola, prenom: Thibault};
+const person = { nom: "Ingargiola", prenom: "Thibault" };
 
 const stringAvant = 'Bonjour je suis ' + person.prenom + ' ' + person.nom;
 const stringApres= `Bonjour je suis ${objet.prenom} ${objet.nom}.
@@ -525,7 +525,7 @@ class G {
 					</section>
 				<section>
 					<h1>Variables</h1>
-					<p>Il existe trois façons de déclarer des variable en javascript:</p>
+					<p>Il existe trois façons de déclarer des variables en javascript:</p>
 					<ul>
 						<li>var: On déclare une variable, éventuellement en initialisant sa valeur.</li>
 						<li>let: On déclare une variable dont la portée est celle du bloc courant, éventuellement en initialisant sa valeur.</li>
@@ -554,7 +554,8 @@ class G {
 						<pre>
 								<code class='javascript'>
 const ARRAY = [1,2,3,4];
-for(let i = 0, _l=ARRAY.length; i < _l; i++ ){console.log(ARRAY[i])}
+
+for(let i = 0, _l=ARRAY.length; i < _l; i++ ){console.log(ARRAY[i], i)}
 
 ARRAY.forEach(function(element, idx){console.log(element, idx)});
 
@@ -564,9 +565,9 @@ ARRAY.map(function(element, idx){console.log(element, idx)});
 				</section>
 				<section>
 					<h1>Scope</h1>
-					<p>Les éléments créé en javascript ont une portée. Un <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Types_et_grammaire#Les_port%C3%A9es_de_variables">Scope</a>.</p>
+					<p>Les éléments créés en javascript ont une portée. Un <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Types_et_grammaire#Les_port%C3%A9es_de_variables">Scope</a>.</p>
 					<p>Lorsqu'une variable est déclarée avec var en dehors des fonctions, elle est appelée variable globale car elle est disponible pour tout le code contenu dans le document. Lorsqu'une variable est déclarée dans une fonction, elle est appelée variable locale car elle n'est disponible qu'au sein de cette fonction.</p>
-					<p>Avant la norme ECMAScript2015 il n'existait pas d'autre manière de déclarer des variables. grâce au mot clé const et let, il est possible de restreindre la portée d'une variable au bloc en cours (un bloc if par exemple)</p>
+					<p>Avant la norme ECMAScript2015 il n'existait pas d'autre manière de déclarer des variables. grâce aux mots clés const et let, il est possible de restreindre la portée d'une variable au bloc en cours (un bloc if par exemple)</p>
 				</section>
 				<section>
 						<h1>Scope</h1>
@@ -631,7 +632,7 @@ privilegedFx2(); // => affiche la dateAppel d'après !
 					<h1>Contexte</h1>
 					<p>Le contexte d'une fonction est représenté par la variable <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Op%C3%A9rateurs/L_op%C3%A9rateur_this">this</a>.</p>
 					<p>La valeur de this sera déterminée à partir de la façon dont une fonction est appelée. Il n'est pas possible de lui affecter une valeur lors de l'exécution et sa valeur peut être différente à chaque fois que la fonction est appelée.</p>
-					<p>Les différentes évolutions du langage on permis de mieux définir cette variable indépendamment de la façon dont elle est appelée (bind, fat-arrow...).</p>
+					<p>Les différentes évolutions du langage on permis de mieux définir cette variable indépendamment de la façon dont elle est appelée : bind, fat-arrow...</p>
 				</section>
 				<section>
 				<h1>Binding implicite</h1>
@@ -641,10 +642,10 @@ privilegedFx2(); // => affiche la dateAppel d'après !
 const monObjet = {
 	firstName: 'Thibault',
 	lastName: 'Ingargiola',
-	fullName: function() {
+	fullName() {
 		console.log(this.firstName + ' ' + this.lastName)
 	},
-	strictFullName: function() {
+	strictFullName() {
 		"use strict";
 		console.log(this.firstName + ' ' + this.lastName)
 	}
@@ -667,11 +668,11 @@ newStrictFullName(); // => Error!!!!!!!! this vaut undefined
 var name = 'Mr X';
 let obj = {
 	name: 'Joe Lopez',
-	greet: function greet(whom) {
+	greet(whom) {
 	console.log(this);
 		console.log(this.name + ' salue ' + whom);
 	},
-	greetAll: function greetAll(first, second, last) {
+	greetAll(first, second, last) {
 	console.log(this);
 		[first, second, last].forEach(this.greet);
 	}
@@ -692,8 +693,8 @@ obj.greetAll('David', 'Joe', 'Guénolé'); // => 'Mr X salue David, Mr X salue J
 				<code class="javascript">
 const obj = {
 	// …
-	greetAll: function greetAll(first, second, last) {
-		var that = this;
+	greetAll(first, second, last) {
+		const that = this;
 		[first, second, last].forEach(function(name) {
 			that.greet(name);
 		});
@@ -709,7 +710,7 @@ const obj = {
 				<code class="javascript">
 const obj = {
 	// …
-	greetAll: function greetAll(first, second, last) {
+	greetAll(first, second, last) {
 		[first, second, last].forEach(this.greet.bind(this));
 	}
 }
@@ -724,7 +725,7 @@ const obj = {
 					<code class="javascript">
 	const obj = {
 		// …
-		greetAll: function greetAll(first, second, last) {
+		greetAll(first, second, last) {
 			[first, second, last].forEach(name => this.greet(name));
 		}
 	}
