@@ -63,16 +63,16 @@
 					<h1>Kesako?</h1>
 					<ul>
 						<li>Langage créé en 1995 pour réaliser des petits scripts dans des pages Web dans le but de les dynamiser</li>
-						<li>Le langage respecte l'ensemble des paradigme orienté objet, et est basé sur un principe de <i>prototype</i></li>
-						<li>Langage nativement supporté par tous les navigateurs Web, ce qui le rend extrèmement populaire</li>
-						<li>Chaque navigateur à cependant son propre moteur JS</li>
+						<li>Le langage respecte l'ensemble des paradigmes orienté objet, et est basé sur un principe de <i>prototype</i></li>
+						<li>Langage nativement supporté par tous les navigateurs Web, ce qui le rend extrêmement populaire</li>
+						<li>Chaque navigateur a cependant son propre moteur JS</li>
 					</ul>
 				</section>
 				<section>
 					<h1>De l'utilisation du JS</h1>
 					<ul>
 							<li>Utilisation au sens premier du langage: dynamiser une page HTML avec quelques scripts côté client</li>
-							<li>Utilisation de Jquery: simplification de fonction complexe (écoute d'vènement, manipulation du DOM ...)</li>
+							<li>Utilisation de Jquery: simplification de fonction complexe (écoute d'évènement, manipulation du DOM ...)</li>
 							<li>Attention! <mark>JS !== JQuery</mark></li>
 							<li>Avènement des SPA: React, Angular, Backbone, Vue ...</li>
 							<li>Multiplication des usages
@@ -90,9 +90,9 @@
 					<h1>Standard ECMAScript (ECMA-262)</h1>
 					<p>Il s'agit des normes Javascript écrites au cours des années.</p>
 					<table>
-						<tr><td>ES5 (2009)</td><td>version la plus connu, supportée par tous les navigateurs</td> </tr>
-						<tr><td>ES 2015 (ES6)</td><td>Ajoute énormément de modification au langage</td> </tr>
-						<tr><td>...</td><td>Evolution annuele de la norme</td> </tr>
+						<tr><td>ES5 (2009)</td><td>version la plus connue, supportée par tous les navigateurs</td> </tr>
+						<tr><td>ES 2015 (ES6)</td><td>Ajoute énormément de modifications au langage</td> </tr>
+						<tr><td>...</td><td>Evolution annuelle de la norme</td> </tr>
 						<tr><td>ES 2019</td><td>version actuelle de la norme</td> </tr>
 						<tr><td>ES next</td><td>version destinée à devenir la nouvelle norme</td> </tr>
 					</table>
@@ -102,10 +102,10 @@
 				<section>
 					<h1>Transpilage</h1>
 					<p>Le langage évoluant rapidement (tous les ans depuis 2015), les moteurs JS ne suivent pas toujours. Une étape de transpilage nous permet d'écrire notre code
-						avec toutes les avancées du langages, et rend cela compréhensible pour les différents moteurs JS</p>
+						avec toutes les avancées du langage, et rend cela compréhensible pour les différents moteurs JS</p>
 						<ul>
 							<li>Babel: Implémente les normes ES2017 et ESnext, les publie sous forme de module pour le développeur.</li>
-							<li>TypeScript: Implemente tout ou parti des normes ES2017 et ESnext. Ajoute un sucre syntaxique de typage pour le langage, ainsi qu'un jeu de fonctions avancées propre à ce typage.</li>
+							<li>TypeScript: Implemente tout ou partie des normes ES2017 et ESnext. Ajoute un sucre syntaxique de typage pour le langage, ainsi qu'un jeu de fonctions avancées propre à ce typage.</li>
 						</ul>
 				</section>
 			</section>
@@ -381,7 +381,7 @@ date.getMilliseconds() // "Milliseconds", un seul mot : une seule initiale.
 						</tr>
 						<tr>
 								<td>!</td>
-								<td>NON logique. Vrai si une l'expression a une valeur <i>Truthy</i>. Faux sinon.</td>
+								<td>NON logique. Faux si l'expression a une valeur <i>Truthy</i>. Vrai sinon.</td>
 							</tr>
 					</table>
 					<blockquote>Attention les opérateurs logiques <i>&&</i>, <i>||</i> et <i>!</i> fonctionnent différemment des opérateurs binaire <i>&</i>, <i>|</i> et <i>~</i>. <br/>Pour plus d'info: <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Expressions_et_Op%C3%A9rateurs#Op%C3%A9rateurs_binaires">La doc MDN</a></a></blockquote>
@@ -448,7 +448,7 @@ g(objet2);
 					</section>
 				<section>
 					<h1>Interpolation de strings</h1>
-					<p>Les nouvelles normes ECMAScript ont permis de faire évoluer le langages et de fournir un moyen de manipuler les strings. Il est désormais possible de créer des chaine de caractères multiligne et paramétrables!</p>
+					<p>Les nouvelles normes ECMAScript ont permis de faire évoluer le langage et de fournir un moyen de manipuler les strings. Il est désormais possible de créer des chaine de caractères multiligne et paramétrables!</p>
 					<pre>
 							<code class="javascript">
 const person = {nom: Ingargiola, prenom: Thibault};
@@ -992,7 +992,7 @@ lala.age; // 47
 					</section>
 					<section>
 						<h1>Module depuis ES6</h1>
-						<p>Il existe différente manière d'exporter et d'importer des choses via module. Le mieux est d'aller voir la <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/import">doc</a> ;)</p>
+						<p>Il existe différentes manières d'exporter et d'importer des choses via module. Le mieux est d'aller voir la <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/import">doc</a> ;)</p>
 						<pre><code class="javascript">
 	/// fichier1.js
 	export default  {
@@ -1071,7 +1071,7 @@ fetch('/users.json')
 					<p>La déclaration <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/async_function">async</a> function définit une fonction asynchrone qui renvoie un objet AsyncFunction.</p>
 					<p>Une fonction asynchrone est une fonction qui s'exécute de façon asynchrone grâce à la boucle d'évènement en utilisant une promesse (Promise) comme valeur de retour.</p>
 					<p>L'opérateur <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Op%C3%A9rateurs/await">await</a> permet d'attendre la résolution d'une promesse. Il ne peut être utilisé qu'au sein d'une fonction asynchrone.</p>
-					<blockquote>Au final c'est un sucre syntaxique autour d'une promesses</blockquote>
+					<blockquote>Au final c'est un sucre syntaxique autour d'une promesse</blockquote>
 				</section>
 			<section>
 				<h1>Async/await</h1>
@@ -1099,7 +1099,7 @@ f1();
 				</section>
 				<section>
 					<h1>lodash</h1>
-					<p><a href="https://lodash.com/docs/4.17.11">Lodash</a> est la librairie utilitaire la plus utilisé du monde JS. Vous voulez manipuler des objets/collections etc. Lodash a certainement la fonction qu'il vous faut.</p>
+					<p><a href="https://lodash.com/docs/4.17.11">Lodash</a> est la librairie utilitaire la plus utilisé du monde JS. Si vous voulez manipuler des objets/collections etc. Lodash a certainement la fonction qu'il vous faut.</p>
 					<ul>
 						<li>Est ce que ma variable est un nombre / function / tableau <code>lodash/lang</code></li>
 						<li>Filtrer, trier, reduce.... <code>lodash/{collection/object/array}</code></li>
@@ -1118,7 +1118,7 @@ f1();
 				</section>
 				<section>
 					<h1>i18n</h1>
-					<p><a href="https://www.i18next.com/">i18n</a> vous sera utile pour gérer l'internationnalisation de votre application. L'intégralité de vous resources textuelles passeront par cette librairie pour pouvoir gérer le multilinguisme.</p>
+					<p><a href="https://www.i18next.com/">i18n</a> vous sera utile pour gérer l'internationalisation de votre application. L'intégralité de vous resources textuelles passeront par cette librairie pour pouvoir gérer le multilinguisme.</p>
 				</section>
 				<section>
 					<h1>node.js</h1>
