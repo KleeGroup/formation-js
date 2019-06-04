@@ -90,14 +90,14 @@
 					<h1>Standard ECMAScript (ECMA-262)</h1>
 					<p>Il s'agit des normes Javascript écrites au cours des années.</p>
 					<table>
-						<tr><td>ES5 (2009)</td><td>version la plus connue, supportée par tous les navigateurs</td> </tr>
+						<tr><td>ES5 (2009)</td><td>Version la plus connue, supportée par tous les navigateurs</td> </tr>
 						<tr><td>ES 2015 (ES6)</td><td>Ajoute énormément de modifications au langage</td> </tr>
 						<tr><td>...</td><td>Evolution annuelle de la norme</td> </tr>
-						<tr><td>ES 2019</td><td>version actuelle de la norme</td> </tr>
-						<tr><td>ES next</td><td>version destinée à devenir la nouvelle norme</td> </tr>
+						<tr><td>ES 2019</td><td>Version actuelle de la norme</td> </tr>
+						<tr><td>ES next</td><td>Version destinée à devenir la nouvelle norme</td> </tr>
 					</table>
 
-					<blockquote>On voit beaucoup de « ES7 » ou « ES8 » qui traînent : en général ça fait référence à l’« ES next » du moment.</blockquote>
+					<blockquote>On voit beaucoup de « ES7 » ou « ES8 » qui traînent : en général, ça fait référence à l’« ES next » du moment.</blockquote>
 				</section>
 				<section>
 					<h1>Transpilage</h1>
@@ -123,8 +123,8 @@
 						<li><b>null</b>: ne possède qu'une unique valeur <i>null</i></li>
 						<li><b>undefined</b>: représente la non-affectation d'une variable</li>
 						<li><b>number</b>: contient l'ensemble des valeurs numéraires (entier, float, NaN, +Infinity, - Infinity)</li>
-						<li><b>string</b>: représente une chaine de caractère à partir d'un ensemble d'élements 16bits non-signés</li>
-						<li><b>symbol</b>: type de données unique et inchangeable (souvent utilisé pour créer des identifiants)</li>
+						<li><b>string</b>: représente une chaine de caractères à partir d'un ensemble d'élements 16bits non-signés</li>
+						<li><b>symbol</b>: type de données uniques et inchangeables (souvent utilisé pour créer des identifiants)</li>
 					</ul>
 					<p>Tout le reste est "Objet" (oui oui même les tableaux...)</p>
 					<p>Un objet avec une "call signature" est une fonction</p>
@@ -164,7 +164,7 @@ obj.a12; // => 'Gino' évidemment ;)
 					<p>C'est un ensemble d'"éléments" de valeurs non signées sur 16 bits (unités de codage UTF-16).</p>
 					<p>Chaque élément occupe une position dans la chaîne de caractères. Le premier élément se trouve à l'indice 0, le suivant à l'indice 1 et ainsi de suite.</p>
 					<p>La longueur d'une chaîne de caractères est le nombre d'éléments qu'elle contient.</p>
-					<p>Une String est <b>immuable</b> il est impossible de la modifier une fois créée. Il est cependant possible de recréer une string à partir d'une autre string.</p>
+					<p>Une String est <b>immuable</b>: il est impossible de la modifier une fois créée. Il est cependant possible de recréer une string à partir d'une autre string.</p>
 				</section>
 				<section>
 						<h1>Strings</h1>
@@ -269,7 +269,7 @@ date.getMilliseconds() // "Milliseconds", un seul mot : une seule initiale.
 // Heure locale du navigateur/système.  On a les mêmes en getUTCXxx()…
 								</code>
 							</pre>
-							<blockquote>Vous avez le choix dans l'implémentation de la date...<br/> De manière générale on préferera utiliser des library de dates type <i>moment.js</i> pour gérer des dates.</blockquote>
+							<blockquote>Vous avez le choix dans l'implémentation de la date...<br/> De manière générale, on préferera utiliser des libraries de dates type <i>moment.js</i> pour gérer des dates.</blockquote>
 					</section>
 				<section>
 					<h1>Operateurs</h1>
@@ -348,7 +348,7 @@ date.getMilliseconds() // "Milliseconds", un seul mot : une seule initiale.
 				<section>
 					<h1>Opérateurs</h1>
 					<p>Les opérateurs javascripts font des conversions implicites.</p>
-					<p>Le javascript ne plantera jamais sur une opération. En revanche il peut vous renvoyer une valeur native comme <i>Nan</i>, <i>+Infinity</i> etc.</p>
+					<p>Le javascript ne plantera jamais sur une opération. En revanche, il peut vous renvoyer une valeur native comme <i>Nan</i>, <i>+Infinity</i> etc.</p>
 					<pre><code class='javascript'>
 	!42  => false
 	!!42  => true //pratique pour convertir n'importe quelle valeur en booleen
@@ -369,7 +369,7 @@ date.getMilliseconds() // "Milliseconds", un seul mot : une seule initiale.
 				</section>
 				<section>
 					<h1>Opérateurs logiques</h1>
-					<p>Ces opérateurs servent à resoudre des expressions logique en prenant en compte le caractère <i>"Truthy"</i> ou <i>"Falsy"</i> des valeurs de l'expression</p>
+					<p>Ces opérateurs servent à résoudre des expressions logiques en prenant en compte le caractère <i>"Truthy"</i> ou <i>"Falsy"</i> des valeurs de l'expression</p>
 					<table>
 						<tr>
 							<td>&&</td>
@@ -384,7 +384,7 @@ date.getMilliseconds() // "Milliseconds", un seul mot : une seule initiale.
 								<td>NON logique. Faux si l'expression a une valeur <i>Truthy</i>. Vrai sinon.</td>
 							</tr>
 					</table>
-					<blockquote>Attention les opérateurs logiques <i>&&</i>, <i>||</i> et <i>!</i> fonctionnent différemment des opérateurs binaire <i>&</i>, <i>|</i> et <i>~</i>. <br/>Pour plus d'info: <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Expressions_et_Op%C3%A9rateurs#Op%C3%A9rateurs_binaires">La doc MDN</a></a></blockquote>
+					<blockquote>Attention: les opérateurs logiques <i>&&</i>, <i>||</i> et <i>!</i> fonctionnent différemment des opérateurs binaire <i>&</i>, <i>|</i> et <i>~</i>. <br/>Pour plus d'info: <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Expressions_et_Op%C3%A9rateurs#Op%C3%A9rateurs_binaires">La doc MDN</a></a></blockquote>
 				</section>
 				<section>
 					<h1>Truthy / Falsy</h1>
@@ -448,7 +448,7 @@ g(objet2);
 					</section>
 				<section>
 					<h1>Interpolation de strings</h1>
-					<p>Les nouvelles normes ECMAScript ont permis de faire évoluer le langage et de fournir un moyen de manipuler les strings. Il est désormais possible de créer des chaines de caractères multiligne et paramétrables!</p>
+					<p>Les nouvelles normes ECMAScript ont permis de faire évoluer le langage et de fournir un moyen de manipuler les strings. Il est désormais possible de créer des chaines de caractères multilignes et paramétrables!</p>
 					<pre>
 							<code class="javascript">
 const person = { nom: "Ingargiola", prenom: "Thibault" };
@@ -535,7 +535,7 @@ class G {
 				</section>
 				<section>
 						<h1>Boucles</h1>
-						<p>Depuis ECMAScript2015 le prototype ARRAY a gagné de nouvelles méthode d'itération sur les éléments. Nous allons en présenter deux ici:</p>
+						<p>Depuis ECMAScript2015, le prototype ARRAY a gagné de nouvelles méthodes d'itération sur les éléments. Nous allons en présenter deux ici:</p>
 						<table>
 							<tr>
 								<td>map</td>
@@ -567,7 +567,7 @@ ARRAY.map(function(element, idx){console.log(element, idx)});
 					<h1>Scope</h1>
 					<p>Les éléments créés en javascript ont une portée. Un <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Types_et_grammaire#Les_port%C3%A9es_de_variables">Scope</a>.</p>
 					<p>Lorsqu'une variable est déclarée avec var en dehors des fonctions, elle est appelée variable globale car elle est disponible pour tout le code contenu dans le document. Lorsqu'une variable est déclarée dans une fonction, elle est appelée variable locale car elle n'est disponible qu'au sein de cette fonction.</p>
-					<p>Avant la norme ECMAScript2015 il n'existait pas d'autre manière de déclarer des variables. grâce aux mots clés const et let, il est possible de restreindre la portée d'une variable au bloc en cours (un bloc if par exemple)</p>
+					<p>Avant la norme ECMAScript2015, il n'existait pas d'autre manière de déclarer des variables. Grâce aux mots clés const et let, il est possible de restreindre la portée d'une variable au bloc en cours (un bloc if par exemple)</p>
 				</section>
 				<section>
 						<h1>Scope</h1>
@@ -632,11 +632,11 @@ privilegedFx2(); // => affiche la dateAppel d'après !
 					<h1>Contexte</h1>
 					<p>Le contexte d'une fonction est représenté par la variable <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Op%C3%A9rateurs/L_op%C3%A9rateur_this">this</a>.</p>
 					<p>La valeur de this sera déterminée à partir de la façon dont une fonction est appelée. Il n'est pas possible de lui affecter une valeur lors de l'exécution et sa valeur peut être différente à chaque fois que la fonction est appelée.</p>
-					<p>Les différentes évolutions du langage on permis de mieux définir cette variable indépendamment de la façon dont elle est appelée : bind, fat-arrow...</p>
+					<p>Les différentes évolutions du langage ont permis de mieux définir cette variable indépendamment de la façon dont elle est appelée : bind, fat-arrow...</p>
 				</section>
 				<section>
 				<h1>Binding implicite</h1>
-				<p>La valeur de <i>this</i> dépend donc de la façon dont il est appelé. De manière générale lorsque <i>this</i> est utilisé dans une fonction il aura la valeur de l'appelant.</p>
+				<p>La valeur de <i>this</i> dépend donc de la façon dont il est appelé. De manière générale, lorsque <i>this</i> est utilisé dans une fonction, il aura la valeur de l'appelant.</p>
 				<pre>
 				<code class="javascript">
 const monObjet = {
@@ -705,7 +705,7 @@ const obj = {
 			</section>
 			<section>
 				<h1>Solution 2: bind</h1>
-				<p>La fonction <a>bind</a> permet de détermnier le contexte d'une fonction qu'importe la façon dont elle est appelée.</p>
+				<p>La fonction <a>bind</a> permet de déterminer le contexte d'une fonction qu'importe la façon dont elle est appelée.</p>
 				<pre>
 				<code class="javascript">
 const obj = {
@@ -716,7 +716,7 @@ const obj = {
 }
 				</code>
 			</pre>
-			<blockquote>Ici on crée donc une nouvelle fonction pour les trois appels dont le contexte vaudra this.</blockquote>
+			<blockquote>Ici, on crée donc une nouvelle fonction pour les trois appels dont le contexte vaudra this.</blockquote>
 			</section>
 			<section>
 					<h1>Solution 3: la fat arrow</h1>
@@ -749,7 +749,7 @@ const obj = {
 			</section>
 			<section>
 				<h1>call et apply</h1>
-				<p>Le fonctions <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function/call">call</a> et <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function/apply">apply</a> permettent de fixer le contexte au travers du premier argument lors de l'appel. La fonction call prendra par la suite une liste d'argument là ou apply utilisera un tableau.</p>
+				<p>Les fonctions <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function/call">call</a> et <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function/apply">apply</a> permettent de fixer le contexte au travers du premier argument lors de l'appel. La fonction call prendra par la suite une liste d'argument là ou apply utilisera un tableau.</p>
 				<pre>
 				<code class="javascript">
 	function ajout(c, d){
@@ -882,7 +882,7 @@ fakeArray.reverse().join(' ');
 					</section>
 				<section>
 					<h1>Classe</h1>
-					<p>Bon depuis ES2015 on a tout de même un équivalent de classe. Ce n'est que du sucre sytaxique, mais c'est quand même vachement bien!</p>
+					<p>Bon depuis ES2015 on a tout de même un équivalent de classe. Ce n'est que du sucre syntaxique, mais c'est quand même vachement bien!</p>
 					<pre>
 							<code class='javascript'>
 class TodoItem extends Component {
@@ -903,7 +903,7 @@ class TodoItem extends Component {
 				</section>
 				<section>
 					<h1>La chaîne d'appel d'une méthode</h1>
-					<p>Supposons que l'on fasse appelle à l'attribut d'un objet: <code>obj.prop</code></p>
+					<p>Supposons que l'on fasse appel à l'attribut d'un objet: <code>obj.prop</code></p>
 					<ol>
 						<li class="fragment visible" data-fragment-index="0">On part de l’objet indexé (obj)</li>
 						<li class="fragment visible" data-fragment-index="1">Si on trouve prop dans ses own properties, on s’arrête là</li>
@@ -1015,7 +1015,7 @@ lala.age; // 47
 			<section id="part-6">
 				<section>
 					<h1>Gestion de l'asynchrone</h1>
-					<p>Dans une application JS vous aurez à gérer de l'asynchrone. Ne serait-ce que pour faire des appels à une API. Il existe plusieurs manière de gérer cela.</p>
+					<p>Dans une application JS, vous aurez à gérer de l'asynchrone. Ne serait-ce que pour faire des appels à une API. Il existe plusieurs manière de gérer cela.</p>
 				</section>
 				<section>
 					<h1>Callbacks</h1>
@@ -1033,7 +1033,7 @@ function slowAlert() {
 				<section>
 					<h1>Promesses</h1>
 					<p>L'objet <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Promise">Promise</a> est utilisé pour réaliser des traitements de façon asynchrone. Une promesse représente une valeur qui peut être disponible maintenant, dans le futur voire jamais.</p>
-					<p>Une promesse a un état (pending, fullfilled, rejected). En fonction de sa résolution elle appelera la callback associée via l'instruction then, qui renverra elle aussi une promesse.</p>
+					<p>Une promesse a un état (pending, fullfilled, rejected). En fonction de sa résolution, elle appellera la callback associée via l'instruction then, qui renverra elle aussi une promesse.</p>
 					<pre><code class="javascript">promise.then(successCb,errorCb).then(otherSuccess, otherCb).catch(errorHandlingFn)</code></pre>
 				</section>
 
@@ -1072,7 +1072,7 @@ fetch('/users.json')
 					<p>La déclaration <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/async_function">async</a> function définit une fonction asynchrone qui renvoie un objet AsyncFunction.</p>
 					<p>Une fonction asynchrone est une fonction qui s'exécute de façon asynchrone grâce à la boucle d'évènement en utilisant une promesse (Promise) comme valeur de retour.</p>
 					<p>L'opérateur <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Op%C3%A9rateurs/await">await</a> permet d'attendre la résolution d'une promesse. Il ne peut être utilisé qu'au sein d'une fonction asynchrone.</p>
-					<blockquote>Au final c'est un sucre syntaxique autour d'une promesse</blockquote>
+					<blockquote>Au final, c'est un sucre syntaxique autour d'une promesse</blockquote>
 				</section>
 			<section>
 				<h1>Async/await</h1>
@@ -1100,7 +1100,7 @@ f1();
 				</section>
 				<section>
 					<h1>lodash</h1>
-					<p><a href="https://lodash.com/docs/4.17.11">Lodash</a> est la librairie utilitaire la plus utilisé du monde JS. Si vous voulez manipuler des objets/collections etc. Lodash a certainement la fonction qu'il vous faut.</p>
+					<p><a href="https://lodash.com/docs/4.17.11">Lodash</a> est la librairie utilitaire la plus utilisée du monde JS. Si vous voulez manipuler des objets/collections etc. Lodash a certainement la fonction qu'il vous faut.</p>
 					<ul>
 						<li>Est ce que ma variable est un nombre / function / tableau <code>lodash/lang</code></li>
 						<li>Filtrer, trier, reduce.... <code>lodash/{collection/object/array}</code></li>
@@ -1110,7 +1110,7 @@ f1();
 				</section>
 				<section>
 					<h1>moment</h1>
-					<p>Les date en JS c'est pas vraiment la joie... Du coup on utilise <a href="https://momentjs.com/">moment</a>. C'est bien plus pratique!</p>
+					<p>Les dates en JS, c'est pas vraiment la joie... Du coup on utilise <a href="https://momentjs.com/">moment</a>. C'est bien plus pratique!</p>
 					<ul>
 						<li>formatter des dates <code>moment().format('L')</code></li>
 						<li>Manipuler des dates <code>moment(maDate).add('days', 1)</code></li>
@@ -1119,7 +1119,7 @@ f1();
 				</section>
 				<section>
 					<h1>i18n</h1>
-					<p><a href="https://www.i18next.com/">i18n</a> vous sera utile pour gérer l'internationalisation de votre application. L'intégralité de vous resources textuelles passeront par cette librairie pour pouvoir gérer le multilinguisme.</p>
+					<p><a href="https://www.i18next.com/">i18n</a> vous sera utile pour gérer l'internationalisation de votre application. L'intégralité de vos ressources textuelles passeront par cette librairie pour pouvoir gérer le multilinguisme.</p>
 				</section>
 				<section>
 					<h1>node.js</h1>
@@ -1136,7 +1136,7 @@ f1();
 				<section>
 					<h1>webpack</h1>
 					<p>
-						<a href="https://webpack.js.org/">Webpack</a> est un ordonnanceur javascript utilisé pour builder les projet javascript. Il permet d'ajouter plusieur module à un pipeline de build.
+						<a href="https://webpack.js.org/">Webpack</a> est un ordonnanceur javascript utilisé pour builder les projets javascript. Il permet d'ajouter plusieurs modules à un pipeline de build.
 					</p>
 					<p>Au travers de ce pipeline de build, on passe d'un projet complexe avec des modules, des librairies etc. à un livrable composé de fichiers statiques à intégrer dans une page web.</p>
 					<blockquote>transpilage --> obfuscation --> compréssion --> postCss --> ...</blockquote>
