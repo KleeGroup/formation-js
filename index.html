@@ -7,7 +7,7 @@
 	<title>JS, ES6, lodash, ...</title>
 
 	<meta name="description" content="Une formation sur le JS">
-	<meta name="author" content="Pierre Besson">
+	<meta name="author" content="Kleegroup">
 
 
 	<meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,17 @@
 	<link href='https://fonts.googleapis.com/css?family=Merriweather:700|Source+Sans+Pro:300,600,300italic,600italic|Source+Code+Pro:400,600' rel='stylesheet' type='text/css'>
 
 
+	<style>
+	.reveal {
+	font-size: 30px;
+	}
+	.multicol {
+		display: flex;
+	}
+	.col {
+		flex:1;
+	}
+	</style>
 </head>
 
 <body>
@@ -43,128 +54,152 @@
 
 	<div class="reveal">
 		<div class="slides">
-			<section data-background='#ffe599'><h1>Javascript</h1><a href='http://get-focus.github.io/formation-js/#/'>http://get-focus.github.io/formation-js/#/</a></section>
-			<section data-background='https://cdn.nextinpact.com/images/bd/news/124984.png'>
-				<style scoped>
-				      h1#jquery { color: red; font-weight: bold; background-color: yellow;}
-				</style>
-				<h1 id='jquery'>JS !== jQuery</h1>
+			<section  data-background='#ffe599'><h1>Javascript</h1><a href='http://get-focus.github.io/formation-js/#/'>http://get-focus.github.io/formation-js/#/</a></section>
+			<section id="part-1">
+				<section>
+					<h1>Présentation</h1>
+				</section>
+				<section>
+					<h1>Kesako?</h1>
+					<ul>
+						<li>Langage créé en 1995 pour réaliser des petits scripts dans des pages Web dans le but de les dynamiser</li>
+						<li>Le langage respecte l'ensemble des paradigmes orienté objet, et est basé sur un principe de <i>prototype</i></li>
+						<li>Langage nativement supporté par tous les navigateurs Web, ce qui le rend extrêmement populaire</li>
+						<li>Chaque navigateur a cependant son propre moteur JS</li>
+					</ul>
+				</section>
+				<section>
+					<h1>De l'utilisation du JS</h1>
+					<ul>
+							<li>Utilisation au sens premier du langage: dynamiser une page HTML avec quelques scripts côté client</li>
+							<li>Utilisation de Jquery: simplification de fonction complexe (écoute d'évènement, manipulation du DOM ...)</li>
+							<li>Attention! <mark>JS !== JQuery</mark></li>
+							<li>Avènement des SPA: React, Angular, Backbone, Vue ...</li>
+							<li>Multiplication des usages
+								<ul>
+									<li>Application desktop (Electron)</li>
+									<li>Application mobile (Cordova, Phonegap)</li>
+									<li>Application mobile "native" (React native)</li>
+									<li>Serveur web (NodeJS)</li>
+									<li>...</li>
+								</ul>
+							</li>
+						</ul>
+				</section>
+				<section>
+					<h1>Standard ECMAScript (ECMA-262)</h1>
+					<p>Il s'agit des normes Javascript écrites au cours des années.</p>
+					<table>
+						<tr><td>ES5 (2009)</td><td>Version la plus connue, supportée par tous les navigateurs</td> </tr>
+						<tr><td>ES 2015 (ES6)</td><td>Ajoute énormément de modifications au langage</td> </tr>
+						<tr><td>...</td><td>Evolution annuelle de la norme</td> </tr>
+						<tr><td>ES 2019</td><td>Version actuelle de la norme</td> </tr>
+						<tr><td>ES next</td><td>Version destinée à devenir la nouvelle norme</td> </tr>
+					</table>
+
+					<blockquote>On voit beaucoup de « ES7 » ou « ES8 » qui traînent : en général, ça fait référence à l’« ES next » du moment.</blockquote>
+				</section>
+				<section>
+					<h1>Transpilage</h1>
+					<p>Le langage évoluant rapidement (tous les ans depuis 2015), les moteurs JS ne suivent pas toujours. Une étape de transpilage nous permet d'écrire notre code
+						avec toutes les avancées du langage, et rend cela compréhensible pour les différents moteurs JS</p>
+						<ul>
+							<li>Babel: Implémente les normes ES2017 et ESnext, les publie sous forme de module pour le développeur.</li>
+							<li>TypeScript: Implemente tout ou partie des normes ES2017 et ESnext. Ajoute un sucre syntaxique de typage pour le langage, ainsi qu'un jeu de fonctions avancées propre à ce typage.</li>
+						</ul>
+				</section>
 			</section>
-			<section>
-				<section data-background='https://media.giphy.com/media/vKZKZ0I9nCAGA/giphy.gif'><h1>Les bases</h1></section>
-				<section data-markdown>
-## Les variables
-
-- `const`  Variable constante qui ne peut plus être modifiée
-- `var`  portée globale ou locale a une fonction
-- `let` portée du block courant `{}`
-
-> A retenir on utilise `const` au maximum et `let` dans les autres cas
-
+			<section id="part-2">
+				<section >
+					<h1>Les bases</h1>
 				</section>
 				<section>
-					<h2>Les strings</h2>
+					<h1>Types primitifs</h1>
+					<p>Il y a 6 <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Structures_de_donn%C3%A9es#Le_type_ind.C3.A9fini">types primitifs</a> en Javascript:</p>
+
+
+					<ul>
+						<li><b>boolean</b>: résultat d'une assertion logique <i>true</i> ou <i>false</i></li>
+						<li><b>null</b>: ne possède qu'une unique valeur <i>null</i></li>
+						<li><b>undefined</b>: représente la non-affectation d'une variable</li>
+						<li><b>number</b>: contient l'ensemble des valeurs numéraires (entier, float, NaN, +Infinity, - Infinity)</li>
+						<li><b>string</b>: représente une chaine de caractères à partir d'un ensemble d'élements 16bits non-signés</li>
+						<li><b>symbol</b>: type de données uniques et inchangeables (souvent utilisé pour créer des identifiants)</li>
+					</ul>
+					<p>Tout le reste est "Objet" (oui oui même les tableaux...)</p>
+					<p>Un objet avec une "call signature" est une fonction</p>
+				</section>
+				<section>
+						<h1>Objets</h1>
+						<p>JavaScript est conçu autour d'un paradigme simple, basé sur les <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Utiliser_les_objets">objets</a>.</p>
+						<p>Un objet est un ensemble de propriétés. Une propriété est une association entre un nom (aussi appelé clé) et une valeur.</p>
+						<p>La valeur d'une propriété peut être une fonction, auquel cas la propriété peut être appelée « méthode ».</p>
+				</section>
+				<section>
+					<h1>Objets</h1>
 					<pre>
-						<code class='javascript'>
-'déjà' < 'demain'              // => false
-'déjà'.localeCompare('demain') // => -1 ('déjà' avant 'demain')
-
-'déjà !'.toLocaleUpperCase()      // => 'DÉJÀ !'
-'ÇA POUTRE'.toLocaleLowerCase()   // => 'ça poutre'
-
-'one,two,three'.split(',')        // => ['one', 'two', 'three']
-'one,,two,three'.split(/\W+/)     // => ['one', 'two']
-
-'hello'.substring(1)      // => 'ello'
-'hello'.slice(1, -2)      // => 'el' -> [1;length-2[
-						</code>
-					</pre>
-				</section>
-				<section>
-					<h2>Les dates</h2>
-					<pre>
-						<code class='javascript'>
-new Date                   //  maintenant !
-new Date(y,m,d[,h,m,s,ms]) // Valeur découpée. (un peu lourd...)
-
-date.getFullYear()  // JAMAIS
-date.getMonth()     // NAZE Java-like qui démarre à… zéro (janvier). #ugly
-date.getDay()       // PERDUUUU ! C'est le DOW (Day Of Week), 0 = dim., 6 = s
-date.getDate()      // Le jour du mois.  Super logique.
-date.getHours()
-date.getMinutes()
-date.getSeconds()
-date.getMilliseconds() // "Milliseconds", un seul mot : une seule initiale.
-
-// Heure locale du navigateur/système.  On a les mêmes en getUTCXxx()…
-						</code>
-					</pre>
-				</section>
-				<section>
-					<h2>Les dates</h2>
-					<pre>
-						<code class='javascript'>
-// "J'ai bien lu la doc"
-date.getTime()  // => ex. 1290852603042
-
-// "#superSmart"
-+date
-
-// Et sinon…
-new Date(1301733937452)
-
-// Mais aussi (car souci pour partir de composantes UTC) :
-Date.UTC(y, m, d, h, mn, s, ms) // => numérique
-
-						</code>
-					</pre>
-				</section>
-				<section>
-					<blockquote>
-						A retenir : Momentjs (on voit ça plus tard...)
-					</blockquote>
-				</section>
-
-				<section>
-					<h2>Les objets</h2>
-					<pre>
-						<code class='javascript'>
-let obj = { first: 'David', last: 'Lopez', age: 77 };
+							<code class='javascript'>
+/// Création d'un objet
+const obj = { first: 'David', last: 'Lopez', age: 77 };
+/// Utilisation des propriétés
 obj.first  // => 'David'
-obj['age'] // => 42
-
+obj['age'] // => 77
+/// Affectation d'une valeur à une propriété
 obj.first = 'pierr';
-obj['first'] // => 'pierr'
-
+obj.first // => 'pierr'
+/// Attention si votre clé de propriété est un nombre!
 obj[77] = 'roberto';
 obj[77]   // => 'roberto'
 obj['77'] // => 'roberto'
 obj.77    // => SyntaxError
-						</code>
-					</pre>
+/// Parce que je fais ce que je veux depuis ES2016 :p
+obj['a'+ 12] = 'Gino';
+obj.a12; // => 'Gino' évidemment ;)
+							</code>
+						</pre>
 				</section>
 				<section>
-					<h2>Les objets avec ES6</h2>
-					<pre>
-						<code class='javascript'>
-let defaults = { first: 'John', last: 'Doe', age: 42 };
-let trainer  = { last: 'Smith', age: 35 };
-trainer      = { ...defaults, ...trainer, age: 36 }
-// => { first: 'John', last: 'Smith', age: 36 }
-trainers['a'+ 12] = 'Gino';
-trainers.a12;
-// Gino
-						</code>
-					<pre>
+					<h1>Strings</h1>
+					<p>Le type <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Formatage_du_texte">String</a> de JavaScript est utilisé pour représenter des données textuelles.</p>
+					<p>C'est un ensemble d'"éléments" de valeurs non signées sur 16 bits (unités de codage UTF-16).</p>
+					<p>Chaque élément occupe une position dans la chaîne de caractères. Le premier élément se trouve à l'indice 0, le suivant à l'indice 1 et ainsi de suite.</p>
+					<p>La longueur d'une chaîne de caractères est le nombre d'éléments qu'elle contient.</p>
+					<p>Une String est <b>immuable</b>: il est impossible de la modifier une fois créée. Il est cependant possible de recréer une string à partir d'une autre string.</p>
 				</section>
 				<section>
-					<h2>Les tableaux</h2>
-					<pre>
+						<h1>Strings</h1>
+						<pre>
+								<code class='javascript'>
+var maString = 'Hello World!';
+maString.length // => 12
+maString[0] // => 'H'
+maString[0] = 'X'; // Aucun effet. une string est immuable
+maString[0] // => 'H'
+/// Quelques fonctions
+'déjà' < 'demain' // => false Cette comparaison ne fait pas du tout ce que vous pensez!
+'déjà'.localeCompare('demain') // => -1 'déjà' est alphabétiquement avant 'demain'
+'déjà !'.toLocaleUpperCase()      // => 'DÉJÀ !' Renvoie une nouvelle instance en majuscule
+'ÇA POUTRE'.toLocaleLowerCase()   // => 'ça poutre' Renvoie une nouvelle instance en minuscule
+'one,two,three'.split(',')        // => ['one', 'two', 'three'] transformation en tableau selon un séparateur
+'one,,two,three'.split(/\W+/)     // => ['one', 'two'] transformation en tableau selon une expression régulière
+'hello'.substring(1)      // => 'ello' renvoie une nouvelle instance d'une partie de la chaine
+'hello'.slice(1, -2)      // => 'el' -> [1;length-2[
+								</code>
+							</pre>
+				</section>
+				<section>
+					<h1>Les tableaux</h1>
+					<p>Un <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Collections_index%C3%A9es">Array</a> est un ensemble ordonné de valeurs auxquelles on peut faire référence avec un nom et un indice.</p>
+					<p>JavaScript ne possède pas de type particulier pour représenter un tableau. En revanche, il est possible d'utiliser l'objet natif <i>Array</i> ainsi que ses méthodes pour manipuler des tableaux</p>
+				</section>
+				<section>
+						<h1>Les tableaux</h1>
+						<pre>
 						<code class='javascript'>
 let names = ['John', 'David', 'Rodrigo'];
 
 names.length
-// => 3. R/W : astuce pour réutiliser un tableau!
+// => 3
 
 names[0]
 // => 'John'
@@ -174,13 +209,13 @@ names.length
 // => 13
 
 names[9]
-// => undefined (comme 10 et 11): c'est appelé "sparse array"
-						</code>
-					</pre>
+// => undefined (comme de 3 à 11): c'est appelé "sparse array"
+								</code>
+							</pre>
 				</section>
 				<section>
+					<h1>Les tableaux</h1>
 					<pre>
-						<h2>Les tableaux</h2>
 						<code class='javascript'>
 let data = [1, 2, 3];
 
@@ -207,395 +242,376 @@ data.slice(-2, -1) // => [2]
 					</pre>
 				</section>
 				<section>
+					<h1>Dates</h1>
+					<p>JavaScript ne possède pas de type primitif pour représenter des dates. Cependant l'objet Date et ses méthodes permettent de manipuler des dates et des heures au sein d'une application.</p>
+					<p>L'objet <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Nombres_et_dates#L'objet_Date">Date</a> possède de nombreuses méthodes pour définir, modifier, obtenir des dates. Il ne possède pas de propriétés</p>
+					<p>JavaScript gère les dates de façon similaire à Java. (Donc assez mal...)</p>
+					<p>Les dates sont représentées selon les nombres de millisecondes écoulées depuis le 1er janvier 1970 à 00h00:00.
+							L'objet Date permet de représenter des dates allant de -100 000 000 jours jusqu'à +100 000 000 jours par rapport au 1er janvier 1970 UTC.</p>
+				</section>
+				<section>
+						<h1>Dates</h1>
+						<pre>
+								<code class='javascript'>
+new Date()                  //  maintenant !
+new Date(y,m,d[,h,m,s,ms]) // Valeur découpée. (un peu lourd...)
+
+date.getYear() // JAMAIS #Bug de l'an 2000 exemple: L'année 1976 renverra 76. Mais l'année 2016 renverra 116. -_-'
+date.getFullYear()	// Mieux mais pas vraiment logique dans le nom...
+date.getMonth()     // NAZE Java-like qui démarre à… zéro (janvier). #ugly
+date.getDay()       // PERDUUUU ! C'est le DOW (Day Of Week), 0 = dim., 6 = sam
+date.getDate()      // Le jour du mois.  Super logique.
+date.getHours()
+date.getMinutes()
+date.getSeconds()
+date.getMilliseconds() // "Milliseconds", un seul mot : une seule initiale.
+
+// Heure locale du navigateur/système.  On a les mêmes en getUTCXxx()…
+								</code>
+							</pre>
+							<blockquote>Vous avez le choix dans l'implémentation de la date...<br/> De manière générale, on préferera utiliser des libraries de dates type <i>moment.js</i> pour gérer des dates.</blockquote>
+					</section>
+				<section>
+					<h1>Operateurs</h1>
+					<table>
+							<tr>
+								<td>==</td>
+								<td>true si les opérandes sont égaux après conversion en valeurs de mêmes types</td>
+							</tr>
+							<tr>
+								<td>!=</td>
+								<td>true si les opérandes sont différents après conversion en valeurs de mêmes types.</td>
+							</tr>
+							<tr>
+								<td>===</td>
+								<td>true si les opérandes sont égaux et de même type. </td>
+							</tr>
+							<tr>
+								<td>!==</td>
+								<td>true si les opérandes ne sont pas égaux ou pas de même type.</td>
+							</tr>
+							<tr>
+								<td>></td>
+								<td>true si l'opérande gauche est supérieur (strictement) à l'opérande droit.</td>
+							</tr>
+							<tr>
+								<td>>=</td>
+								<td>true si l'opérande gauche est supérieur ou égal à l'opérande droit.</td>
+							</tr>
+							<tr>
+								<td><</td>
+								<td>true si l'opérande gauche est inférieur (strictement) à l'opérande droit.</td>
+							</tr>
+							<tr>
+								<td><=</td>
+								<td>true si l'opérande gauche est inférieur ou égal à l'opérande droit.</td>
+							</tr>
+					</table>
+				</section>
+				<section>
+						<h2>Quelques pièges de comparaisons en JS ...</h2>
+						<pre>
+							<code class='javascript'>
+	== ou === ?!
+
+	42 == '42'        // => true  --
+	null == undefined // => true  --
+	null == 0         // => false --
+	0 == undefined    // => false --
+	0 == false        // => true  --
+	1 == true         // => true  --
+	42 == true        // => false --
+	'0' == false      // => true  --
+	'' == false       // => true  --
+	NaN == NaN        // => false --
+							</code>
+						</pre>
+						<blockquote>C'est franchement sale...</blockquote>
+					</section>
+					<section>
+						<h2>Pour éviter les écueils, utiliser ===</h2>
+						<pre>
+							<code class='javascript'>
+	// avec ===, fini de jouer : vérif valeur ET TYPE !
+
+	42 === '42'        // => false
+	null === undefined // => false
+	null === 0         // => false
+	0 === undefined    // => false
+	0 === false        // => false
+	'0' === false      // => false
+	NaN === NaN        // => false -- rien à faire !
+							</code>
+						</pre>
+						<blockquote>Toujours utiliser la comparaison stricte === et !==</blockquote>
+				</section>
+				<section>
+					<h1>Opérateurs</h1>
+					<p>Les opérateurs javascripts font des conversions implicites.</p>
+					<p>Le javascript ne plantera jamais sur une opération. En revanche, il peut vous renvoyer une valeur native comme <i>Nan</i>, <i>+Infinity</i> etc.</p>
+					<pre><code class='javascript'>
+	!42  => false
+	!!42  => true //pratique pour convertir n'importe quelle valeur en booleen
+	+'2'  => 2
+	"lala" + 42 => "lala42"
+	1/0 => Infinity
+	"lala" - 42 => NaN
+
+	{} + [] => 0 // Hum ok...
+	[] + {} => "[object Object]" // parce que why not!
+	{} + {} => "[object Object][object Object]" // Bon ça je veux bien
+	[] + [] => "" // Nan mais les gars...
+	[] - {} => NaN // -_-'
+	+[] => 0 // Ah ah
+	+[] + [] => "0" // Vous l'avez?
+	+[] + +[] => 0 // Bon ok j'arrete :=)
+					</code></pre>
+				</section>
+				<section>
+					<h1>Opérateurs logiques</h1>
+					<p>Ces opérateurs servent à résoudre des expressions logiques en prenant en compte le caractère <i>"Truthy"</i> ou <i>"Falsy"</i> des valeurs de l'expression</p>
+					<table>
+						<tr>
+							<td>&&</td>
+							<td>ET logique. Vrai si les deux expressions ont des valeur <i>Truthy</i>. S'arrête à la première valeur <i>Falsy</i></td>
+						</tr>
+						<tr>
+							<td>||</td>
+							<td>OU logique. Vrai si une des deux expressions a une valeur <i>Truthy</i>. S'arrête à la première valeur <i>Truthy</i></td>
+						</tr>
+						<tr>
+								<td>!</td>
+								<td>NON logique. Faux si l'expression a une valeur <i>Truthy</i>. Vrai sinon.</td>
+							</tr>
+					</table>
+					<blockquote>Attention: les opérateurs logiques <i>&&</i>, <i>||</i> et <i>!</i> fonctionnent différemment des opérateurs binaire <i>&</i>, <i>|</i> et <i>~</i>. <br/>Pour plus d'info: <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Expressions_et_Op%C3%A9rateurs#Op%C3%A9rateurs_binaires">La doc MDN</a></a></blockquote>
+				</section>
+				<section>
+					<h1>Truthy / Falsy</h1>
+					<pre><code class="javascript">
+"true" == true => false // la chaine de caratère "true" même après conversion n'est pas égale à true.
+"true" && true => true // la chaine de caratère "true" pour ce qui est des expression logique!!
+"true"&true => 0 // le & binaire renvoie le bit 0...
+"1" == true => true // bah oui après converstion "1" => 1 => true donc égale à true...
+					</code></pre>
+					<blockquote>Globalement les valeurs suivantes sont Falsy : <ul><li>false</li><li>undefined</li><li>null</li><li>""</li><li>0</li><li>NaN</li></ul>. Le reste est Truthy.</blockquote>
+				</section>
+				<section>
+					<h1>Destructuring  / Spreading</h1>
+					<p>Des opérateurs de décomposition (<a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Op%C3%A9rateurs/Syntaxe_d%C3%A9composition">Spread</a>) et d'affectation par décomposition (<a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Op%C3%A9rateurs/Affecter_par_d%C3%A9composition">Destructuring</a>) ont fait leur apparition pour manipuler plus simplement les objets et les collections.</p>
+					<ul>
+						<li>La syntaxe de décomposition permet d'étendre un itérable en lieu et place de plusieurs arguments (pour les appels de fonctions) ou de plusieurs éléments (pour les tableaux) ou de paires clés-valeurs (pour les objets).</li>
+						<li>L'affectation par décomposition est une expression JavaScript qui permet d'extraire des données d'un tableau ou d'un objet grâce à une syntaxe dont la forme ressemble à la structure du tableau ou de l'objet.</li>
+					</ul>
+				</section>
+				<section>
+					<h1>
+							Destructuring / Spreading
+					</h1>
 					<pre>
-						<h2>Les tableaux en ES6</h2>
-						<code class='javascript'>
+							<code class="javascript">
+/* Arrays */
+// Initialisation d'un array
+const array = [1, 2, 3];
+// On crée un nouvel array à partir de l'ancien
+const array2 = [...array, 4, 5]; // array2 => [1,2,3,4,5]
+function f(a, b, c) {
+		return a + b + c;
+}
+// On appelle la fonction à partir de l'array
+f(...array); // => 1+2+3
+// On récupère des éléments précis d'un array.
+const [a, b, c, ...rest] = array2; // a=1; b=2, c=3, rest=[4,5]
+							</code>
+							</pre>
+				</section>
+				<section>
+						<h1>
+								Destructuring / Spreading
+						</h1>
+						<pre>
+								<code class="javascript">
+/* Objets */
+// Initialisation d'un objet.
+const objet = {a: 1, b: 2};
+// On crée un nouvel objet à partir de l'ancien
+const objet2 = {...objet, c: 3}; // objet2 = {a:1, b:2, c:3}
+// On récupère des éléments précis d'un objet.
+const {a, b, ...rest} = objet2; // a=1 b=2 rest={c:3}
+// On peut aussi déstructurer directement dans une fonction :
+function g({a, b, c: c2}) {
+		return a + b + c2;
+}
+g(objet2);
+								</code>
+							</pre>
+					</section>
+				<section>
+					<h1>Interpolation de strings</h1>
+					<p>Les nouvelles normes ECMAScript ont permis de faire évoluer le langage et de fournir un moyen de manipuler les strings. Il est désormais possible de créer des chaines de caractères multilignes et paramétrables!</p>
+					<pre>
+							<code class="javascript">
+const person = { nom: "Ingargiola", prenom: "Thibault" };
 
-let arr1 = ['one', 'two'], arr2 = ['three', 'four'];
-arr1.push(...arr2) // => 4
-arr1                // => ['one', 'two', 'three', 'four']
-//le map 
-arr1.map(element => console.log(element))
-// for…in itère sur LES PROPRIÉTÉS ÉNUMÉRABLES de N’IMPORTE QUEL OBJET
-var arr = ['hello', 'world', , 'cool'];
-for (var k in arr){ console.log(k)}; // => 0, 1, 3
-// for…of itère sur les éléments d'un objet itérable
-for (var k of arr){ console.log(k)}; // => hello, world, undefined, cool
-
+const stringAvant = 'Bonjour je suis ' + person.prenom + ' ' + person.nom;
+const stringApres= `Bonjour je suis ${objet.prenom} ${objet.nom}.
+Et le javascript c'était pas mieux avant!`;
+							</code>
+						</pre>
+				</section>
+			</section>
+			<section id="part3">
+				<section>
+					<h1>Programmation en JS</h1>
+				</section>
+				<section>
+					<h1>Les fonctions</h1>
+					<p>Les fonctions sont un peu la base de toute programmation... Le Javascript n'échappe pas à la règle.</p>
+					<p>En JavaScript, les fonctions sont des objets de première classe. Cela signifie qu'elles peuvent être manipulées et échangées, qu'elles peuvent avoir des propriétés et des méthodes, comme tous les autres objets JavaScript. Les fonctions sont des objets <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Fonctions">Function</a></p>
+					<p>Afin de renvoyer une valeur, la fonction doit comporter une instruction return. Une fonction qui ne renvoie pas de valeur retourne undefined.</p>
+				</section>
+				<section>
+					<h1>Déclaration</h1>
+					<pre>
+						<code class="javascript">
+/// Fonction standard
+function a() {
+	/// this = contexte appelant
+}
+/// Variable fonction anonyme (ne pas utiliser)
+const b = function() {
+	/// this = contexte appelant
+}
+/// Variable fonction nommée (usage assez rare)
+const c = function c() {
+	/// this = contexte appelant
+}
+/// Lambda / "fat arrow" (anonyme)
+const d = () => {
+	/// this = contexte de la déclaration
+}
+/// fonction auto-appelante (usage particulier)
+(function(){
+	/// this = contexte appelant
+})()
 						</code>
 					</pre>
 				</section>
 				<section>
-					<pre>
-						<h2>"Déguiser" un objet en tableau<h2>
-						<code class='javascript'>
-// Toi aussi, déguise-toi en tableau !
-
-var fakeArray = { 0: '!', 1: 'ça torche', 2: 'JavaScript', length: 3 };
-
-fakeArray.join = [].join; fakeArray.reverse = [].reverse;
-fakeArray.reverse().join(' ');
-// => 'JavaScript ça torche !'
-
-// Ou alors :
-fakeArray.__proto__ = Array.prototype;
-fakeArray.reverse().join(' ');
-// => 'JavaScript ça torche !'
-
-// Méthodes « génériques » utilisables: hn
-// concat, join, pop, push, reverse, shift,
-// slice, sort, splice, toString, unshift.
-						</code>
-					</pre>
+						<h1>Déclaration</h1>
+						<pre>
+							<code class="javascript">
+/// La syntaxe de a est un raccourci pour celle de b. (usage assez rare)
+const e {
+    a() {
+        /// this = contexte appelant
+    },
+    b: function b() {
+        /// this = contexte appelant
+    }
+}
+/// Dans une classe
+class G {
+    a() {
+        /// this = contexte appelant
+		}
+		/// Variable d'instance
+    b = () => {
+        /// this = instance de la classe
+    }
+}
+							</code>
+						</pre>
+					</section>
+				<section>
+					<h1>Variables</h1>
+					<p>Il existe trois façons de déclarer des variables en javascript:</p>
+					<ul>
+						<li>var: On déclare une variable dont la portée est celle de la fonction courante, éventuellement en initialisant sa valeur.</li>
+						<li>let: On déclare une variable dont la portée est celle du bloc courant, éventuellement en initialisant sa valeur.</li>
+						<li>const: On déclare une constante nommée, dont la portée est celle du bloc courant, accessible en lecture seule.</li>
+					</ul>
+					<blockquote>var n'est plus vraiment utilisé dans les nouvelles normes. On préfèrera utiliser const dans les 3/4 des cas, et let dans les cas ou la variables est réaffectable.</blockquote>
 				</section>
 				<section>
-					<h2>Les boucles</h2>
-					<pre>
-						<code class='javascript'>
+						<h1>Boucles</h1>
+						<p>Depuis ECMAScript2015, le prototype ARRAY a gagné de nouvelles méthodes d'itération sur les éléments. Nous allons en présenter deux ici:</p>
+						<table>
+							<tr>
+								<td>map</td>
+								<td>immutable</td>
+								<td>Crée un nouveau tableau avec les résultats de l'appel d'une fonction fournie sur chaque élément du tableau appelant.</td>
+							</tr>
+							<tr>
+								<td>foreach</td>
+								<td>mutable</td>
+								<td>Permet d'exécuter une fonction donnée sur chaque élément du tableau. Ne renvoie rien</td>
+							</tr>
+						</table>
+				</section>
+				<section>
+						<h1>Boucles</h1>
+						<pre>
+								<code class='javascript'>
 const ARRAY = [1,2,3,4];
-for(let i = 0, _l=ARRAY.length; i < _l; i++ ){console.log(ARRAY[i])}
+
+for(let i = 0, _l=ARRAY.length; i < _l; i++ ){console.log(ARRAY[i], i)}
 
 ARRAY.forEach(function(element, idx){console.log(element, idx)});
 
 ARRAY.map(function(element, idx){console.log(element, idx)});
-						</code>
-					</pre>
+								</code>
+							</pre>
 				</section>
-
 				<section>
-					<h2>Les fonctions</h2>
-					<pre>
-						<code class='javascript'>
-function maFonction() {
-	return 'test';
+					<h1>Scope</h1>
+					<p>Les éléments créés en javascript ont une portée. Un <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Types_et_grammaire#Les_port%C3%A9es_de_variables">Scope</a>.</p>
+					<p>Lorsqu'une variable est déclarée avec var en dehors des fonctions, elle est appelée variable globale car elle est disponible pour tout le code contenu dans le document. Lorsqu'une variable est déclarée dans une fonction, elle est appelée variable locale car elle n'est disponible qu'au sein de cette fonction.</p>
+					<p>Avant la norme ECMAScript2015, il n'existait pas d'autre manière de déclarer des variables. Grâce aux mots clés const et let, il est possible de restreindre la portée d'une variable au bloc en cours (un bloc if par exemple)</p>
+				</section>
+				<section>
+						<h1>Scope</h1>
+						<pre>
+							<code class="javascript">
+if (true) {
+	var x = 5;
 }
-maFonction() // test;
-const a = () => 'test';
-a(); //test
-						</code>
-					</pre>
-				</section>
+console.log(x); // x vaut 5
 
-				<section>
-					<h2>Quelques pièges de comparaisons en JS ...</h2>
-					<pre>
-						<code>
-== ou === ?!
-
-42 == '42'        // => true  -- 
-null == undefined // => true  -- 
-null == 0         // => false -- 
-0 == undefined    // => false -- 
-0 == false        // => true  -- 
-1 == true         // => true  -- 
-42 == true        // => false -- 
-'0' == false      // => true  -- 
-'' == false       // => true  -- 
-NaN == NaN        // => false -- 
-						</code>
-					</pre>
-				</section>
-				<section>
-					<h2>Pour éviter les écueils, utiliser ===</h2>
-					<pre>
-						<code>
-// avec ===, fini de jouer : vérif valeur ET TYPE !
-
-42 === '42'        // => false
-null === undefined // => false
-null === 0         // => false
-0 === undefined    // => false
-0 === false        // => false
-'0' === false      // => false
-NaN === NaN        // => false -- rien à faire !
-						</code>
-					</pre>
-				</section>
-				<section>
-					<h2>in et delete</h2>
-					<pre>
-						<code class='javascript'>
-
-let person = { name: 'Joe', langs: ['fr', 'en'] };
-
-'name' in person        // => true
-person.age = 35;
-'age' in person         // => true
-person.age = null;
-'age' in person         // => true
-delete person.age
-'age' in person         // => false
-person.age              // => undefined
-
-0 in person.langs       // => true
-'0' in person.langs     // => true
-person.langs[3] = 'de';
-2 in person.langs       // => false
-3 in person.langs       // => true
-delete person.langs[3]
-person.langs            // => ['fr', 'en', undefined, undefined]
-						</code>
-					</pre>
-				</section>
-				<section>
-					<h2>Falsy / Truthy</h2>
-				</section>
-				<section>
-					<h2>XML</h2>
-					<pre>
-					<code class='xml'>
-<menu id="file" value="File">
-  <popup>
-    <menuitem value="New" onclick="CreateNewDoc()"></menuitem>
-    <menuitem value="Open" onclick="OpenDoc()" ></menuitem>
-    <menuitem value="Close" onclick="CloseDoc()" ></menuitem>
-  </popup>
-</menu>
-					</code>
-				</pre>
-
-				</section>
-				<section>
-					<h2>JSON</h2>
-					<pre>
-					<code class='javascript'>
-{
-    "menu": {
-        "id": "file",
-        "value": "File",
-        "popup": {
-            "menuitem": [
-                { "value": "New", "onclick": "CreateNewDoc()" },
-                { "value": "Open", "onclick": "OpenDoc()" },
-                { "value": "Close", "onclick": "CloseDoc()" }
-            ]
-        }
-    }
+if (true) {
+	let y = 5;
 }
-					</code>
-				</pre>
-
+console.log(y); // ReferenceError: y is not defined
+							</code>
+						</pre>
 				</section>
-
-
 				<section>
-					<h2>Oublions jQuery</h2>
+					<h1>Closure</h1>
+					<p>Il est possible d'imbriquer une fonction au sein d'une fonction. La fonction imbriquée (interne) est privée par rapport à la fonction (externe) qui la contient. Cela forme ce qu'on appelle une <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Fonctions#Fonctions_imbriqu%C3%A9es_et_fermetures">Closure</a>.</p>
+					<p>Étant donné qu'une fonction imbriquée est une closure, cela signifie que la fonction imbriquée peut « hériter » du scope de la fonction parente. Et donc avoir accès aux variables de cette fonction.</p>
+				</section>
+				<section>
+						<h1>Closure</h1>
+						<pre><code class="javascript">
+function externe(x) {
+	function interne(y) {
+			return x + y;
+	}
+	return interne;
+}
+var fn_interne = externe(3); // fn_interne est donc une fonction qui prend en parametre y en renvoie 3 + y
+var resultat = fn_interne(5); // donc 8
+
+var resultat1 = externe(3)(5); // renvoie 8
+						</code></pre>
+				</section>
+				<section>
+					<h1>Closure</h1>
 					<pre>
-					<code class='javascript'>
-//Avant
-const monElement = $('[data-my-selector]');
-
-//Après
-const monElement = document.querySelector('[data-my-selector]');
-					</code>
-				</pre>
-
-				</section>
-			</section>
-			<section data-state="theme-color-blue-yellow">
-				<section data-background=''>
-					<h1>Les outils</h1>
-				</section>
-				<section data-background='https://nodejs.org/static/images/logos/nodejs-green.png'>
-				</section>
-				<section>
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>Node.js</h2>
-					<ul>
-						<li>JS côté serveur</li>
-						<li>Apporte plein d'outils sous forme de modules</li>
-						<li><a href='npmjs.com'>npm</a> (node package module)</li>
-					</ul>
-				</section>
-				<section >
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>Node.js</h2>
-					<ul>
-						<li>package.json</li>
-						<li>node_modules</li>
-						<li><code>npm install -g ma-dependance-globale</code></li>
-						<li><code>npm install -g rimraf</code></li>
-						<li><code>npm install --save ma-dependance</code></li>
-					</ul>
-				</section>
-				<section data-background='http://www.kolhamevaser.com/wp-content/uploads/2015/05/Schechter.Bavel_.TowerofBavel.jpg'>
-					<h1>Babel</h1>
-				</section>
-				<section data-background='http://jlongster.com/s/upload/webpack-hot1.png'>
-			    		<h1 style='background-color:rgba(1,1,1, 0.5);'><a href='https://webpack.github.io/'>Webpack</a></h1>
-				</section>
-
-				<section data-background=''>
-					<h1>Debug</h1>
-				</section>
-			</section>
-			<section data-state="theme-color-blue-yellow">
-				<section data-background='https://media.giphy.com/media/RHUGfUYnjNuMw/giphy.gif'>
-					<h1>Prototypes / Constructor</h1>
-				</section>
-				<section>
-					<h2>Classes ?</h2>
-					<ul>
-						<li>Avant ES6 pas de classe</li>
-						<li>JS est un langage prototypale</li>
-						<li>En JS tout est un objet</li>
-						<li>Une propriété est identifiée par une paire nom / valeur</li>
-						<li>Une propriété peut être une fonction</li>
-					</ul>
-				</section>
-				<section>
-					<h2>Constructeur</h2>
-					<ul>
-					    <li>Fonctions servant à initialiser un nouvel objet. Le nom du constructeur est un peu comme « le nom de la classe »…</li>
-					    <li>Toute fonction peut servir de constructeur : il suffit de l’appeler avec l’opérateur new.</li>
-					    <li>Elle dispose alors d’une variable implicite this, qui représente la nouvelle « instance ».</li>
-					    <li>L’objet créé référence son constructeur : constructor.</li>
-					</ul>
-				</section>
-				<section>
-					<h2>Constructeur</h2>
-					<pre>
-						<code class='javascript'>
-function Person(first, last) {
-  this.first = first;
-  this.last = last;
-}
-
-var joeLopezPerson = new Person('Joe', 'Lopez');
-var davidLopezz = new Person('David', 'lopez');
-joeLopezPerson.first // => 'Joe'
-davidLopezz.first   // => 'David'
-
-// Si on jouait aux cons ?!
-function LopezPerson(first, last) {
-  this.first = first;
-  this.last = last;
-  return { first: 'Anne', last: 'Pas Lopez' };
-}
-var oops = new LopezPerson('Henry', 'Lopez');
-oops.first // => Anne
-						</code>
-					</pre>
-				</section>
-
-				<section>
-					<h2>Prototypes</h2>
-					<ul>
-					    <li>Tout constructeur a un prototype : un objet qui définit les propriétés (et donc méthodes) partagées par tous les objets que produit ce constructeur.</li>
-					    <li>Le prototype est « vivant » : si on le triture après l’appel au constructeur, ça marche quand même !</li>
-					    <li>Techniquement, y’a plein d’autres trucs dans un prototype (réf. au constructeur, gestion de propriétés…).</li>
-						<li>On verra, plutôt vous verrez...</li>
-					</ul>
-				</section>
-				<section>
-					<h2>Prototype</h2>
-					<pre>
-						<code class='javascript'>
-function Person(first, last) {
-  this.first = first;
-  this.last = last;
-}
-
-// On augmente l'existant…
-Person.prototype.fullName = function fullName() {
-  return this.first + ' ' + this.last;
-}
-Person.prototype.greet = function greet() {
-  alert('Salut je m’appelle ' + this.first);
-}
-
-var john = new Person('John', 'Smith');
-john.fullName() // => 'John Smith'
-john.greet()    // 'Salut je m’appelle John'
-						</code>
-					</pre>
-				</section>
-				<section>
-					<h2>Prototype (Don't)</h2>
-					<pre>
-						<code class='javascript'>
-function Person(first, last) {
-  this.first = first;
-  this.last = last;
-  this.fullName = function fullName() {
-    return this.first + ' ' + this.last;
-  }
-  this.greet = function greet() {
-    alert('Salut je m’appelle ' + this.first);
-  }
-}
-var john = new Person('John', 'Smith');
-john.fullName() // => 'John Smith'
-john.greet()    // 'Salut je m’appelle John'
-						</code>
-					</pre>
-					<blockquote>Mauvaise pratique: on copie la fonction dans chaque constructeur</blockquote>
-				</section>
-				<section>
-					<h2>Les classes ES6</h2>
-					<pre>
-						<code class='javascript'>
-class TodoItem extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      editing: false
-    };
-  }
-
-  handleDoubleClick() {
-    this.setState({ editing: true });
-  }
-  …
-}
-						</code>
-					</pre>
-					<blockquote class='fragment'>Attention il s'agit de sucre syntaxique pas d'une classe comme en Java ou .NET. Le JS reste un langage prototypale.</blockquote>
-				</section>
-				<section>
-					<h2>La chaîne d'appel d'une méthode</h2>
-					<code>obj.prop</code> ou <code>obj['prop']</code> (c'est équivalent)
-					<ol>
-						<li class='fragment'>On part de l’objet indexé (obj)</li>
-						<li class='fragment'>Si on trouve prop dans ses own properties, on s’arrête là</li>
-						<li class='fragment'>Sinon, on passe sur le prototype du niveau supérieur : celui du constructeur de l’objet en cours*</li>
-						<li class='fragment'>On reprend à l’étape 2, sauf si on était déjà sur Object.prototype, auquel cas le lookup est fini, et échoue (undefined).</li>
-					</ol>
-					<footer>*conceptuellement, <code>constructor.prototype</code> ou <code>__proto__</code></footer>
-				</section>
-				<section data-background=''>
-					<h2>La preuve en live...</h2>
-					<pre>
-						<code class='javascript'>
-function Person(first, last) {
-  this.first = first;
-  this.last = last;
-}
-Person.prototype.fullName = function fullName() {
-  return this.first + ' ' + this.last;
-};
-const davidLopez = new Person('David', 'Lopez');
-
-davidLopez.first      // => 'David',         own property
-davidLopez.fullName() // => 'David Lopez', Person.prototype
-davidLopez.toString() // => '[object Object]', Object.prototype
-
-Person.prototype.toString = function personToString() {
-  return '#Person ' + this.fullName();
-};
-
-davidLopez.toString() // => "#Person David Lopez"
-						</code>
-					</pre>
-				</section>
-			</section>
-			<section>
-				<section data-background=''><h1>Closure</h1></section>
-				<section >
-					<h2>Closure simple</h2>
-					<pre>
-						<code class='javascript'>
+							<code class='javascript'>
 function publicFx() {
-  let dateAppel = Date.now();
-  return function() { console.log(dateAppel); };
+	let dateAppel = Date.now();
+	return function() { console.log(dateAppel); };
 }
 let privilegedFx1 = publicFx();
 // Attendre un bref instant
@@ -608,311 +624,530 @@ let privilegedFx2 = publicFx();
 // renvoyéees sont préservées
 privilegedFx1(); // => affiche la dateAppel du moment de la création de la fonction privilegedFx1!
 privilegedFx2(); // => affiche la dateAppel d'après !
-						</code>
-					</pre>
+							</code>
+						</pre>
+						<blockquote>Les closures sont un bon moyen de rendre privée une partie du code. Elles seront très utiles pour créer des modules. Mais on y reviendra plus tard...</blockquote>
 				</section>
 				<section>
-					<h2>Les modules sont une utilisation des closures</h2>
-					<pre><code class="javascript">
-function yourModule(require, module, exports) {
-
-  let widgets = {};
-  let util = require('util');
-  let Widget = require('widgets/base');
-
-  function CoolWidget(elt) { … }
-  util.inherits(CoolWidget, Widget);
-  // …
-
-  module.exports = Widget;
-}
-					</code></pre>
-					<blockquote>Dans node on ne voit pas la fonction enrobante...</blockquote>
+					<h1>Contexte</h1>
+					<p>Le contexte d'une fonction est représenté par la variable <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Op%C3%A9rateurs/L_op%C3%A9rateur_this">this</a>.</p>
+					<p>La valeur de this sera déterminée à partir de la façon dont une fonction est appelée. Il n'est pas possible de lui affecter une valeur lors de l'exécution et sa valeur peut être différente à chaque fois que la fonction est appelée.</p>
+					<p>Les différentes évolutions du langage ont permis de mieux définir cette variable indépendamment de la façon dont elle est appelée : bind, fat-arrow...</p>
 				</section>
-				<section data-background='http://995642590.r.lightningbase-cdn.com/wp-content/uploads/2013/05/HR-Double-Bind-article-by-John-Sumser-on-HR-Examiner-425x282px.jpg'>
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>Le binding</h2>
+				<section>
+				<h1>Binding implicite</h1>
+				<p>La valeur de <i>this</i> dépend donc de la façon dont il est appelé. De manière générale, lorsque <i>this</i> est utilisé dans une fonction, il aura la valeur de l'appelant.</p>
+				<pre>
+				<code class="javascript">
+const monObjet = {
+	firstName: 'Thibault',
+	lastName: 'Ingargiola',
+	fullName() {
+		console.log(this.firstName + ' ' + this.lastName)
+	},
+	strictFullName() {
+		"use strict";
+		console.log(this.firstName + ' ' + this.lastName)
+	}
+};
 
-				</section>
-				<section data-background='http://995642590.r.lightningbase-cdn.com/wp-content/uploads/2013/05/HR-Double-Bind-article-by-John-Sumser-on-HR-Examiner-425x282px.jpg'>
-					<h2>Le problème</h2>
-					<pre>
-						<code class='javascript'>
+monObjet.fullName(); // => log Thibault Ingargiola. Dans ce cas this === monObjet
+monObjet.strictFullName(); // => IDEM
+
+const newFullName = monObjet.fullname; const newStrictFullName = monObjet.strictFullname;
+newFullName(); // => log undefined undefined. this vaut window.
+newStrictFullName(); // => Error!!!!!!!! this vaut undefined
+				</code>
+			</pre>
+			</section>
+			<section>
+				<h1>Le problème</h1>
+				<p>Comment faire si je veux utiliser <i>this</i> mais que je ne maitrise pas l'appelant?</p>
+				<pre>
+				<code class="javascript">
 var name = 'Mr X';
 let obj = {
-  name: 'Joe Lopez',
-  greet: function greet(whom) {
-	console.log(this) 
-    console.log(this.name + ' salue ' + whom);
-  },
-  greetAll: function greetAll(first, second, last) {
-	console.log(this)
-    [first, second, last].forEach(this.greet);
-  }
+	name: 'Joe Lopez',
+	greet(whom) {
+	console.log(this);
+		console.log(this.name + ' salue ' + whom);
+	},
+	greetAll(first, second, last) {
+	console.log(this);
+		[first, second, last].forEach(this.greet);
+	}
 };
 obj.greet("les lopezs de France");
 // => 'Joe Lopez salut les lopezs de France !'
 let fx = obj.greet;
 fx("l’atelier") // => '"Mr X salue l’atelier"'
-obj.greetAll('David', 'Joe', 'Guénolé'); // => 'Mr X salue David, Mr X salue Joe, Mr X salue undefined'
-						</code>
-					</pre>
-				</section>
-				<section data-background='http://995642590.r.lightningbase-cdn.com/wp-content/uploads/2013/05/HR-Double-Bind-article-by-John-Sumser-on-HR-Examiner-425x282px.jpg'>
-					<h2>Comment faire ? La closure?</h2>
-					<pre>
-						<code class='javascript'>
+obj.greetAll('David', 'Joe', 'Guénolé'); // => 'Mr X salue David, Mr X salue Joe, Mr X salue Guénolé'
+/// Le contexte est perdu au travers du foreach
+				</code>
+			</pre>
+			</section>
+			<section>
+				<h1>Solution 1: la closure</h1>
+				<p>On fixe le contexte et on fait un appel explicite à la fonction.</p>
+				<pre>
+				<code class="javascript">
 const obj = {
-  // …
-  greetAll: function greetAll(first, second, last) {
-    var that = this;
-    [first, second, last].forEach(function(name) {
-      that.greet(name);
-    });
-  }
+	// …
+	greetAll(first, second, last) {
+		const that = this;
+		[first, second, last].forEach(function(name) {
+			that.greet(name);
+		});
+	}
 }
-						</code>
-					</pre>
-				</section>
-				<section data-background=''>
-					<h2>Comment faire ? ES6 style?</h2>
-					<pre>
-						<code class='javascript'>
+				</code>
+			</pre>
+			</section>
+			<section>
+				<h1>Solution 2: bind</h1>
+				<p>La fonction <a>bind</a> permet de déterminer le contexte d'une fonction qu'importe la façon dont elle est appelée.</p>
+				<pre>
+				<code class="javascript">
 const obj = {
-  // …
-  greetAll(first, second, last) {
-    [first, second, last].forEach(name => this.greet(name));
-	//Ultra fat
-  }
+	// …
+	greetAll(first, second, last) {
+		[first, second, last].forEach(this.greet.bind(this));
+	}
 }
-						</code>
-					</pre>
+				</code>
+			</pre>
+			<blockquote>Ici, on crée donc une nouvelle fonction pour les trois appels dont le contexte vaudra this.</blockquote>
+			</section>
+			<section>
+					<h1>Solution 3: la fat arrow</h1>
+					<p>Cette notation permet de <i>"binder"</i> automatiquement le contexte englobant.</p>
+					<pre>
+					<code class="javascript">
+	const obj = {
+		// …
+		greetAll(first, second, last) {
+			[first, second, last].forEach(name => this.greet(name));
+		}
+	}
+					</code>
+				</pre>
+				</section>
+			<section>
+				<h1>Binding</h1>
+				<p>La fat arrow c'est la vie!</p>
+				<pre>
+					<code class="javascript">
+['add', 'remove'].forEach((action) => {
+	['change', 'status', 'error'].forEach((elt) => {
+		this[`${action}${capitalizeDefinition}${capitalize(elt)}Listener`] = (cb) => {
+			this[`${action}Listener`](`${def}:${elt}`, cb);
+		}
+	})
+});
+					</code>
+				</pre>
+			</section>
+			<section>
+				<h1>call et apply</h1>
+				<p>Les fonctions <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function/call">call</a> et <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function/apply">apply</a> permettent de fixer le contexte au travers du premier argument lors de l'appel. La fonction call prendra par la suite une liste d'argument là ou apply utilisera un tableau.</p>
+				<pre>
+				<code class="javascript">
+	function ajout(c, d){
+		return this.a + this.b + c + d;
+	}
+
+	var o = {a:1, b:3};
+
+	ajout.call(o, 5, 7); // 1 + 3 + 5 + 7 = 16
+
+	ajout.apply(o, [10, 20]); // 1 + 3 + 10 + 20 = 34
+				</code>
+			</pre>
+			</section>
+			</section>
+			<section id="part-4">
+				<section>
+					<h1>Le JS objet</h1>
+					<blockquote>On l'avait dit au début, mais le javascript n'a pas de de classe à proprement parler. C'est un langage <i>prototypable</i>!</blockquote>
 				</section>
 				<section>
-					<h2>call et apply</h2>
+						<h1>Constructeur</h1>
+						<ul>
+								<li>Fonctions servant à initialiser un nouvel objet. Le nom du constructeur est un peu comme « le nom de la classe »…</li>
+								<li>Toute fonction peut servir de constructeur : il suffit de l’appeler avec l’opérateur new.</li>
+								<li>Elle dispose alors d’une variable implicite this, qui représente la nouvelle « instance ».</li>
+								<li>L’objet créé référence son constructeur : constructor.</li>
+						</ul>
+					</section>
+					<section>
+						<h1>Constructeur</h1>
+						<pre>
+							<code class='javascript'>
+function Person(first, last) {
+this.first = first;
+this.last = last;
+}
+
+var joeLopezPerson = new Person('Joe', 'Lopez');
+var davidLopezz = new Person('David', 'lopez');
+joeLopezPerson.first // => 'Joe'
+davidLopezz.first   // => 'David'
+
+// Si on jouait aux cons ?!
+function LopezPerson(first, last) {
+this.first = first;
+this.last = last;
+return { first: 'Anne', last: 'Pas Lopez' };
+}
+var oops = new LopezPerson('Henry', 'Lopez');
+oops.first // => Anne
+							</code>
+						</pre>
+			</section>
+				<section>
+						<h2>Prototypes</h2>
+						<ul>
+								<li>Tout constructeur a un prototype : un objet qui définit les propriétés (et donc méthodes) partagées par tous les objets que produit ce constructeur.</li>
+								<li>Le prototype est « vivant » : si on le triture après l’appel au constructeur, ça marche quand même !</li>
+								<li>Techniquement, y’a plein d’autres trucs dans un prototype (réf. au constructeur, gestion de propriétés…).</li>
+							<li>On verra, plutôt vous verrez...</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Prototype</h2>
+						<pre>
+							<code class='javascript'>
+function Person(first, last) {
+	this.first = first;
+	this.last = last;
+}
+
+// On augmente l'existant…
+Person.prototype.fullName = function fullName() {
+	return this.first + ' ' + this.last;
+}
+Person.prototype.greet = function greet() {
+	alert('Salut je m’appelle ' + this.first);
+}
+
+var john = new Person('John', 'Smith');
+john.fullName() // => 'John Smith'
+john.greet()    // 'Salut je m’appelle John'
+							</code>
+						</pre>
+					</section>
+					<section>
+						<h2>Prototype (Don't)</h2>
+						<pre>
+							<code class='javascript'>
+function Person(first, last) {
+	this.first = first;
+	this.last = last;
+	this.fullName = function fullName() {
+		return this.first + ' ' + this.last;
+	}
+	this.greet = function greet() {
+		alert('Salut je m’appelle ' + this.first);
+	}
+}
+var john = new Person('John', 'Smith');
+john.fullName() // => 'John Smith'
+john.greet()    // 'Salut je m’appelle John'
+							</code>
+						</pre>
+						<blockquote>Mauvaise pratique: on copie la fonction dans chaque constructeur</blockquote>
+					</section>
+				<section>
+						<pre>
+							<h2>"Déguiser" un objet en tableau</h2>
+							<code class='javascript'>
+/// Toi aussi, déguise-toi en tableau !
+
+var fakeArray = { 0: '!', 1: 'ça torche', 2: 'JavaScript', length: 3 };
+
+fakeArray.join = [].join; fakeArray.reverse = [].reverse;
+fakeArray.reverse().join(' ');
+/// => 'JavaScript ça torche !'
+
+// Ou alors :
+fakeArray.__proto__ = Array.prototype;
+fakeArray.reverse().join(' ');
+// => 'JavaScript ça torche !'
+
+// Méthodes « génériques » utilisables: hn
+// concat, join, pop, push, reverse, shift,
+// slice, sort, splice, toString, unshift.
+							</code>
+						</pre>
+					</section>
+				<section>
+					<h1>Classe</h1>
+					<p>Bon depuis ES2015 on a tout de même un équivalent de classe. Ce n'est que du sucre syntaxique, mais c'est quand même vachement bien!</p>
 					<pre>
-						<code class='javascript'>
+							<code class='javascript'>
+class TodoItem extends Component {
+	constructor(props, context) {
+		super(props, context);
+		this.state = {
+			editing: false
+		};
+	}
 
+	handleDoubleClick() {
+		this.setState({ editing: true });
+	}
+	…
+}
+							</code>
+						</pre>
+				</section>
+				<section>
+					<h1>La chaîne d'appel d'une méthode</h1>
+					<p>Supposons que l'on fasse appel à l'attribut d'un objet: <code>obj.prop</code></p>
+					<ol>
+						<li class="fragment visible" data-fragment-index="0">On part de l’objet indexé (obj)</li>
+						<li class="fragment visible" data-fragment-index="1">Si on trouve prop dans ses own properties, on s’arrête là</li>
+						<li class="fragment visible" data-fragment-index="2">Sinon, on passe sur le prototype du niveau supérieur : celui du constructeur de l’objet en cours*</li>
+						<li class="fragment visible" data-fragment-index="3">On reprend à l’étape 2, sauf si on était déjà sur Object.prototype, auquel cas le lookup est fini, et échoue (undefined).</li>
+					</ol>
+					<blockquote class="fragment visible" data-fragment-index="2">*on le trouve sous: <code>constructor.prototype</code> ou <code>__proto__</code></blockquote>
+				</section>
+				<section>
+						<h2>La preuve en live...</h2>
+						<pre>
+							<code class="javascript hljs ">
+function Person(first, last) {
+	this.first = first;
+	this.last = last;
+}
+Person.prototype.fullName = function fullName() {
+	return this.first + ' ' + this.last;
+};
+const davidLopez = new Person('David', 'Lopez');
 
-//let fx = obj.greet;
-fx.call(obj, 'les singes') // Joe Lopez salue les singes
+davidLopez.first      // => 'David',         own property
+davidLopez.fullName() // => 'David Lopez', Person.prototype
+davidLopez.toString() // => '[object Object]', Object.prototype
 
+Person.prototype.toString = function personToString() {
+	return '#Person ' + this.fullName();
+};
 
-let xy = { 0: 'Zero', 1: 'One', length: 2 };
-Array.prototype.join.call(xy, '-') // 'Zero-One'
-
-
-fx.apply(obj, ['']) // => 'Joe salue l’atelier'
-Array.prototype.push.apply(xy, ['Two', 'Three', 'Four']) // => 5
-xy // => { 0: 'Zero', 1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', length: 5 }
-</code>
-</pre>
-
+davidLopez.toString() // => "#Person David Lopez"
+							</code>
+						</pre>
 				</section>
 			</section>
-			<section >
-				<section data-background='http://104.236.204.173/wp-content/uploads/2015/05/async.jpg'>
-					<h1 style='background-color:rgba(1,1,1, 0.5);'>JS et asynchronisme</h1>
+			<section id="part-5">
+				<section>
+					<h1>Structure applicative</h1>
+					<p>Une application SPA est composée de plusieurs fichiers javascripts. C'est quand même plus pratique pour coder!</p>
+					<p>On découpe donc une application en modules</p>
+					<div class="multicol">
+						<div class="col"><img src="./images/structure-application.PNG"/></div>
+						<div class="col"><img src="./images/structure-application-2.PNG"/></div>
+					</div>
 				</section>
 				<section>
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>Callback</h2>
-					<pre>
-						<code>
+					<h1>Module avant ES6</h1>
+					<p>Les modules javascripts permettent d'isoler votre code du reste de l'application, d'organiser votre code, d'éviter les collision de noms etc.</p>
+					<pre><code class="javascript">
+/// fichier1.js
+const private = 5;
+const monObjet = {
+	name: "lala",
+	age: 42 + private,
+	awesomeness: true
+
+}
+
+module.exports = monObjet;
+
+/// fichier2.js
+const lala = require('./fichier1.js');
+lala.awesomeness; // true;
+private; // undefined
+lala.age; // 47
+					</code></pre>
+				</section>
+				<section>
+						<h1>Module depuis ES6</h1>
+						<p>Il est possible d'exporter plusieurs variables au sein d'un même fichier en les nommant.</p>
+						<pre><code class="javascript">
+	/// fichier1.js
+	export monObjet = {
+		name: "lala",
+		age: 42
+	}
+
+	export monObjet2 = {
+			name: "lola",
+			age: 8
+	}
+
+	/// fichier2.js
+	import {monObjet, monObjet2 as renommage} from "./fichier1.js";
+
+	monObjet.age; // 42
+	renommage.age; // 8
+						</code></pre>
+					</section>
+					<section>
+						<h1>Module depuis ES6</h1>
+						<p>Il existe différentes manières d'exporter et d'importer des choses via module. Le mieux est d'aller voir la <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/import">doc</a> ;)</p>
+						<pre><code class="javascript">
+	/// fichier1.js
+	export default  {
+		name: "lala",
+		age: 42
+	}
+
+	export const lolo = 28
+
+	/// fichier2.js
+	import lala from "./fichier1.js";
+	import * as monModule from './fichier1.js';
+
+	lala.age; // 42
+	monModule.lolo; // 28
+						</code></pre>
+					</section>
+			</section>
+			<section id="part-6">
+				<section>
+					<h1>Gestion de l'asynchrone</h1>
+					<p>Dans une application JS, vous aurez à gérer de l'asynchrone. Ne serait-ce que pour faire des appels à une API. Il existe plusieurs manière de gérer cela.</p>
+				</section>
+				<section>
+					<h1>Callbacks</h1>
+					<pre><code class="javascript">
 function delayedAlert() {
-  window.setTimeout(slowAlert, 2000);
+	window.setTimeout(slowAlert, 2000);
 }
 
 function slowAlert() {
-  alert("That was really slow!");
+	alert("That was really slow!");
 }
 					</code></pre>
+					<blockquote>Attention le code de la callback est exécuté dans un contexte complètement différent!</blockquote>
 				</section>
 				<section>
-					<h2>Les promesses</h2>
-					<p>
-						Une promesse a un état (pending, fullfilled, rejected).<br>
-						Elle est asynchrone, et se termine soit par un succès soit par une erreur et renvoie une nouvelle promesse.
-					</p>
-					<code class='javascript'>promise.then(successCb,errorCb).then(otherSuccess, otherCb).catch(errorHandlingFn)</code>
-
+					<h1>Promesses</h1>
+					<p>L'objet <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Promise">Promise</a> est utilisé pour réaliser des traitements de façon asynchrone. Une promesse représente une valeur qui peut être disponible maintenant, dans le futur voire jamais.</p>
+					<p>Une promesse a un état (pending, fullfilled, rejected). En fonction de sa résolution, elle appellera la callback associée via l'instruction then, qui renverra elle aussi une promesse.</p>
+					<pre><code class="javascript">promise.then(successCb,errorCb).then(otherSuccess, otherCb).catch(errorHandlingFn)</code></pre>
 				</section>
+
 				<section>
-					<h2>Les promesses</h2>
-					<pre><code class='javascript'>
-const myPromise = new Promise((resolve, reject) => {
-	ajaxCall({success: resolve, error: reject});
-})
+						<h1>Promesses</h1>
+					<pre><code class="javascript">
+var promise1 = new Promise(function(resolve, reject) {
+	setTimeout(function() {
+		resolve('foo');
+	}, 300);
+});
 
-Promise.resolve([1,2,3,4]);
-
-Promise.reject('ma super erreur')
-
+promise1.then(function(value) {
+	console.log(value);
+	// expected output: "foo"
+});
 					</code></pre>
-
 				</section>
+
 				<section>
-					<H2 style='background-color:rgba(1,1,1, 0.5);'>Les promesses</H2>
-					<pre class='javascript'><code>
+						<h1>Promesses</h1>
+
+						<pre><code class="javascript">
 fetch('/users.json')
-  .then(function(response) {
-    return response.json()
-  }).then(function(json) {
-    console.log('parsed json', json)
-  }).catch(function(ex) {
-    console.log('parsing failed', ex)
-  })					</code></pre>
+.then(function(response) {
+	return response.json()
+}).then(function(json) {
+	console.log('parsed json', json)
+}).catch(function(ex) {
+	console.log('parsing failed', ex)
+})
+						</code></pre>
+					</section>
+				<section>
+					<h1>Async/await</h1>
+					<p>La déclaration <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/async_function">async</a> function définit une fonction asynchrone qui renvoie un objet AsyncFunction.</p>
+					<p>Une fonction asynchrone est une fonction qui s'exécute de façon asynchrone grâce à la boucle d'évènement en utilisant une promesse (Promise) comme valeur de retour.</p>
+					<p>L'opérateur <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Op%C3%A9rateurs/await">await</a> permet d'attendre la résolution d'une promesse. Il ne peut être utilisé qu'au sein d'une fonction asynchrone.</p>
+					<blockquote>Au final, c'est un sucre syntaxique autour d'une promesse</blockquote>
 				</section>
+			<section>
+				<h1>Async/await</h1>
+				<pre><code class="javascript">
+function resolveAfter2Seconds(x) {
+	return new Promise(resolve => {
+		setTimeout(() => {
+			resolve(x);
+		}, 2000);
+	});
+}
+
+async function f1() {
+	var x = await resolveAfter2Seconds(10);
+	console.log(x); // 10
+}
+f1();
+				</pre></code>
 			</section>
-			<section >
-				<section data-background=''>
-					<h1>ES6 / 2015</h1>
+		</section>
+
+			<section id="part-7">
+				<section>
+					<h1>L'éco-système JS</h1>
 				</section>
 				<section>
-					<h2>Les modules de node</h2>
-					<pre>
-						<code class='javascript'>
-//Dans un fichier
-module.exports = monObjetAExporter;
-
-//Utilisation
-require('./mon_module_locale');
-//Utilisation d'un module npm
-require('mon_module');
-</code>
-
-
-					</pre>
-				</section>
-				<section>
-					<h2>Les modules de Papa</h2>
-					<pre>
-						<code class='javascript'>
-import * as types from '../constants/ActionTypes';
-
-export function addTodo(text) {
-  return { type: types.ADD_TODO, text };
-}
-import React, { PropTypes, Component } from 'react';
-import classnames from 'classnames';
-import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from '../constants/TodoFilters';
-import 'http://material.js'
-…
-export default Footer;
-export const ADD_TODO = 'ADD_TODO';
-export const DELETE_TODO = 'DELETE_TODO';
-export const EDIT_TODO = 'EDIT_TODO';
-
-</code>
-
-
-					</pre>
-				</section>
-
-				<section>
-					<h2>Destruct</h2>
-					<pre>
-						<code class='javascript'>
-const { activeCount } = this.props;
-…
-const { filter: selectedFilter, onShow } = this.props;
-const [, filters] = output.props.children;
-…
-const [,, clear] = output.props.children;
-var { op: a, lhs: { op: b }, rhs: c } = getASTNode();
-Détails
-</code>
-
-
-					</pre>
-				</section>
-				<section>
-					<h2>Les strings interpolation et multi lignes</h2>
-					<pre>
-						<code class='javascript'>
-const person = { first: 'Thomas', last: 'Anderson', age: 25, nickname: 'Neo' };
-
-// Interpolation de JS quelconque
-console.log(`${person.first} aka ${person.nickname}`)
-// => 'Thomas aka Neo'
-
-// Multi-ligne !
-const markup = `<li>
-${person.first} ${person.last}, age ${person.age}
-</li>`;
-
-					</code>
-
-
-					</pre>
-				</section>
-				<section>
-					<h2>Valeur par défaut dans une fonction</h2>
-					<pre>
-						<code class='javascript'>
-function add(source, numToAdd = 1){
-	return source + numToAdd;
-}
-						</code>
-
-
-					</pre>
-				</section>
-				<section>
-					<h2>Les objets</h2>
-					<pre>
-						<code class='javascript'>
-function editTodo(id, text) {
-  return { type: types.EDIT_TODO, id, text };
-  //On créé un objet avec pour clef le nom de la variable.
-}
-const FILTERS = {
-  [maVar1]: 'All',
-  [maVar2]: 'Active',
-  [maVar3]: 'Completed'
-};
-						</code>
-
-
-					</pre>
-				</section>
-			</section>
-			<section >
-				<section data-background=''>
-					<h1 style='background-color:rgba(1,1,1, 0.5);'>LODASH / UNDERSCORE</h1>
-
-				</section>
-				<section>
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>on ne réinvente pas la roue</h2>
-				</section>
-				<section>
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>Les trucs utiles</h2>
+					<h1>lodash</h1>
+					<p><a href="https://lodash.com/docs/4.17.11">Lodash</a> est la librairie utilitaire la plus utilisée du monde JS. Si vous voulez manipuler des objets/collections etc. Lodash a certainement la fonction qu'il vous faut.</p>
 					<ul>
 						<li>Est ce que ma variable est un nombre / function / tableau <code>lodash/lang</code></li>
 						<li>Filtrer, trier, reduce.... <code>lodash/{collection/object/array}</code></li>
 						<li>Plein de fonctions prêtes à l'emploi <code>lodash/function</code></li>
+						<li>...</li>
 					</ul>
 				</section>
-			</section>
-			<section >
-				<section data-background='http://cdn.londonandpartners.com/visit/london-organisations/big-ben/63602-640x360-bigben_tilt_640.jpg'>
-					<h1 style='background-color:rgba(1,1,1, 0.5);'><a href='http://momentjs.com'>MOMENT</a></h1>
-				</section>
 				<section>
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>on ne réinvente pas la roue</h2>
-		        	<iframe webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="http://momentjs.com/" src="http://momentjs.com/" height='50%'  width='80%'></iframe>
-				</section>
-				<section>
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>Les trucs utiles</h2>
+					<h1>moment</h1>
+					<p>Les dates en JS, c'est pas vraiment la joie... Du coup on utilise <a href="https://momentjs.com/">moment</a>. C'est bien plus pratique!</p>
 					<ul>
 						<li>formatter des dates <code>moment().format('L')</code></li>
 						<li>Manipuler des dates <code>moment(maDate).add('days', 1)</code></li>
 						<li>Timezone...</li>
 					</ul>
-					<blockquote>Si tu manipules des dates tu utilises momentjs</blockquote>
 				</section>
-			</section>
-			<section >
 				<section>
-					<h1 style='background-color:rgba(1,1,1, 0.5);'><a href='https://github.com/get-focus/formation-js/tree/master/exercices'>Exercices</a></h1>
+					<h1>i18n</h1>
+					<p><a href="https://www.i18next.com/">i18n</a> vous sera utile pour gérer l'internationalisation de votre application. L'intégralité de vos ressources textuelles passeront par cette librairie pour pouvoir gérer le multilinguisme.</p>
+				</section>
+				<section>
+					<h1>node.js</h1>
+					<p>
+						<a href="https://nodejs.org/en/">Node.js</a> vous permet de créer des applicatifs écrits en javascript, et notamment des serveurs. On l'utilisera notamment pour éxécuter l'intégralité de la toolchain d'un projet SPA.
+					</p>
+				</section>
+				<section>
+					<h1>babel</h1>
+					<p>
+						<a href="https://babeljs.io/">Babel</a> est le traducteur universelle du javascript. Il permet de transpiler le langage écrit dans une version évoluée d'ECMAScript en une version compréhensible pour n'importe quel navigateur.
+					</p>
+				</section>
+				<section>
+					<h1>webpack</h1>
+					<p>
+						<a href="https://webpack.js.org/">Webpack</a> est un ordonnanceur javascript utilisé pour builder les projets javascript. Il permet d'ajouter plusieurs modules à un pipeline de build.
+					</p>
+					<p>Au travers de ce pipeline de build, on passe d'un projet complexe avec des modules, des librairies etc. à un livrable composé de fichiers statiques à intégrer dans une page web.</p>
+					<blockquote>transpilage --> obfuscation --> compréssion --> postCss --> ...</blockquote>
+				</section>
+				<section>
+					<h1>npm</h1>
+					<p>
+						<a href="https://www.npmjs.com/">Npm</a> (Node Package Manager) est le gestionnaire de paquet qui vient avec Node.js. Il vous servira à gérer l'intégralité de vos dépendances javascripts.
+					</p>
+					<blockquote>npm install internet</blockquote>
 				</section>
 			</section>
 		</div>
@@ -940,17 +1175,5 @@ const FILTERS = {
 				]
 			});
 		</script>
-		<script>
-          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-          ga('create', 'UA-70256271-2', 'auto');
-          ga('send', 'pageview');
-
-        </script>
-
-
 </body>
 </html>
